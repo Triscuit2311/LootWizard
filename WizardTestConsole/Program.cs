@@ -7,8 +7,6 @@ using FuzzySharp;
 namespace WizardTestConsole
 {
     
-    
-    
     internal class Program
     {
         
@@ -38,9 +36,7 @@ namespace WizardTestConsole
             }
             
             Console.WriteLine($"Loaded: [Items: {itemsData.ItemsList.Count}(L) ~ {itemsData.ItemsDict.Count}(D) | Quests: {questsData.QuestList.Count}]");
-
-
-
+            
 
             while (true)
             {
@@ -54,14 +50,12 @@ namespace WizardTestConsole
                 
                 foreach (var item in res)
                 {
-                    Console.WriteLine("\t" + item.short_name);
+                    Console.WriteLine($"\t {item.short_name} ({item.name})");
                 }
             }
             
         }
-
-
-
+        
 
     }
 }
