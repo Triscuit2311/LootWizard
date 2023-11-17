@@ -1,0 +1,18 @@
+﻿<Window x:Class="LootWizard.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LootWizard"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        
+        <Image Name="Image1" Width="64">
+            <Image.Source>
+                <BitmapImage DecodePixelWidth="997"
+                             UriSource="https://assets.tarkov.dev/55d482194bdc2d1d4e8b456b-icon.webp"/>
+            </Image.Source> 
+        </Image>
+    </Grid>
+</Window>

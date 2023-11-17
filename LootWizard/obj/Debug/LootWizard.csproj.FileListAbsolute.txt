@@ -1,0 +1,15 @@
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\LootWizard.exe.config
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\LootWizard.exe
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\LootWizard.pdb
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.csproj.AssemblyReference.cache
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\MainWindow.g.cs
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\App.g.cs
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard_MarkupCompile.cache
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard_MarkupCompile.lref
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\MainWindow.baml
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.g.resources
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.Properties.Resources.resources
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.csproj.GenerateResource.cache
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.csproj.CoreCompileInputs.cache
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.exe
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.pdb
