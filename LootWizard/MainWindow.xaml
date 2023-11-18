@@ -7,12 +7,158 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
-        <Image Name="Image1" Width="64">
-            <Image.Source>
-                <BitmapImage DecodePixelWidth="997"
-                             UriSource="https://assets.tarkov.dev/55d482194bdc2d1d4e8b456b-icon.webp"/>
-            </Image.Source> 
-        </Image>
+        <TabControl TabStripPlacement="Left">
+            <!-- TabControl Style -->
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid>
+                                    <Border Background="Gray" Margin="0,5,0,5">
+                                        <ContentPresenter x:Name="ContentSite"
+                                                          VerticalAlignment="Center"
+                                                          HorizontalAlignment="Center"
+                                                          ContentSource="Header"
+                                                          Margin="12,2" />
+                                    </Border>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="DarkGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+
+            <!-- Items Tab -->
+            <TabItem Header="Items">
+                <Grid>
+                    <!-- Search Bar -->
+                    <TextBox x:Name="SearchBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200"
+                             Margin="10" TextChanged="SearchBox_TextChanged" />
+
+                    <!-- List of Items -->
+                    <ListView x:Name="ItemsList" Margin="10,50,10,10" HorizontalContentAlignment="Stretch">
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:DisplayItem}">
+                                <Grid Margin="5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" /> <!-- For Image -->
+                                        <ColumnDefinition Width="*" />   <!-- For Name and Price -->
+                                        <ColumnDefinition Width="Auto" /> <!-- For Favorite Toggle Button -->
+                                        <ColumnDefinition Width="Auto" /> <!-- For CheckBox -->
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Image -->
+                                    <Image Grid.Column="0" Source="{Binding item.img_path}" Width="50" Height="50"
+                                           Stretch="Uniform"
+                                           ImageFailed="Image_OnFailed" RenderOptions.BitmapScalingMode="HighQuality" />
+
+                                    <!-- Name and Price in a Vertical StackPanel -->
+                                    <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
+                                        <TextBlock Text="{Binding display_name}" />
+                                        <TextBlock Text="{Binding display_price}" />
+                                        <TextBlock Text="{Binding display_price_slot}" />
+                                    </StackPanel>
+
+                                    <!-- Favorite Toggle Button -->
+                                    <ToggleButton Grid.Column="2" IsChecked="{Binding itemData.favorite}"
+                                                  Margin="10,0,0,0" Width="24" Height="24" BorderThickness="0">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Image x:Name="imgFavorite"
+                                                                   Source="{Binding StarInactivePath}"
+                                                                   RenderOptions.BitmapScalingMode="HighQuality">
+                                                                <Image.Effect>
+                                                                    <DropShadowEffect x:Name="imgShadowEffect"
+                                                                        Color="Transparent" BlurRadius="0" />
+                                                                </Image.Effect>
+                                                            </Image>
+                                                            <ControlTemplate.Triggers>
+                                                                <DataTrigger Binding="{Binding itemData.favorite}"
+                                                                             Value="True">
+                                                                    <Setter TargetName="imgFavorite" Property="Source"
+                                                                            Value="{Binding StarActivePath}" />
+                                                                </DataTrigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+                                    
+                                    
+                                    
+                                    
+                                    <ToggleButton Grid.Column="3" IsChecked="{Binding itemData.selected}"
+                                                  Margin="10,0,0,0" Width="24" Height="24" BorderThickness="0">
+                                        <ToggleButton.Style>
+                                            <Style TargetType="ToggleButton">
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ToggleButton">
+                                                            <Image x:Name="imgChecked"
+                                                                   Source="{Binding CheckActivePath}"
+                                                                   RenderOptions.BitmapScalingMode="HighQuality">
+                                                                <Image.Effect>
+                                                                    <DropShadowEffect x:Name="imgShadowEffect"
+                                                                        Color="Transparent" BlurRadius="0" />
+                                                                </Image.Effect>
+                                                            </Image>
+                                                            <ControlTemplate.Triggers>
+                                                                <DataTrigger Binding="{Binding itemData.selected}"
+                                                                             Value="True">
+                                                                    <Setter TargetName="imgChecked" Property="Source"
+                                                                            Value="{Binding CheckInactivePath}" />
+                                                                </DataTrigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ToggleButton.Style>
+                                    </ToggleButton>
+
+                                    <!-- Checkbox -->
+                                    <!-- <CheckBox Grid.Column="3" Margin="10,0,0,0"/> -->
+                                    
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+
+                </Grid>
+            </TabItem>
+
+
+            <!-- Quests Tab -->
+            <TabItem Header="Quests">
+                <!-- Content for Quests Tab -->
+            </TabItem>
+
+            <!-- Settings Tab -->
+            <TabItem Header="Settings">
+                <!-- Content for Settings Tab -->
+            </TabItem>
+            
+        </TabControl>
     </Grid>
 </Window>

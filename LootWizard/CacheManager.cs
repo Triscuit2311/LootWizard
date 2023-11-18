@@ -5,8 +5,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using ImageMagick;
 
-namespace WizardTestConsole;
+namespace LootWizard;
 
 public class CacheManager : IDisposable
 {
@@ -43,20 +45,28 @@ public class CacheManager : IDisposable
         var quests = CreateTasksFromJson(questsJson);
 
         questsData.QuestList = new List<Quest>(quests);
-
-
+        
         Console.WriteLine("Populating Item Objects");
         var items = CreateItemsFromJson(itemsJson);
         
-        // Copy list over
-        itemsData.ItemsList = new List<Item>(items);
+        PersistentItemManager.LoadUpdate();
 
         Console.WriteLine("Checking Image Cache..");
         int missing_imgs = 0;
+
+        var default_color = Colors.Aqua;
+        
+        
         foreach (var item in items)
         {
+            // add persistant data if needed
+            PersistentItemManager.AddDoNotUpdate(item.id,
+                new PersistentItemData(item.id, default_color , false));
+
             // Updating items dict
             itemsData.ItemsDict.Add(item.id,item);
+            
+            itemsData.SearchResults.Add(new DisplayItem(item,PersistentItemManager.Get(item.id)));
             
             // updating item search
             itemsData.SearchEntries.Add(new ItemsData.SearchEntry(
@@ -95,7 +105,7 @@ public class CacheManager : IDisposable
     private static async Task CacheItemImage(HttpClient httpClient, Item item)
     {
         string imgDirectory = "img";
-        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.webp");
+        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
 
         if (!File.Exists(imgPath))
         {
@@ -105,21 +115,22 @@ public class CacheManager : IDisposable
             }
 
             byte[] imageData = await httpClient.GetByteArrayAsync(item.icon_link);
-            File.WriteAllBytes(imgPath, imageData);
+
+            // Convert WebP to JPEG
+            using (var webpImage = new MagickImage(imageData))
+            {
+                webpImage.Format = MagickFormat.Jpeg;
+                webpImage.Write(imgPath); // This saves the image in JPEG format
+            }
         }
     }
 
     private static bool CheckImageCache(Item item)
     {
         string imgDirectory = "img";
-        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.webp");
+        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
 
-        if (!File.Exists(imgPath))
-        {
-            return false;
-        }
-
-        return true;
+        return File.Exists(imgPath);
     }
 
     static Dictionary<string, string> items_query = new Dictionary<string, string>()

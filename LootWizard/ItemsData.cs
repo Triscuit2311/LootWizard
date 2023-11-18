@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace WizardTestConsole;
+namespace LootWizard;
 
 public class ItemsData
 {
@@ -18,7 +19,8 @@ public class ItemsData
         }
     }
     
-    public List<Item> ItemsList = new();
     public Dictionary<string, Item> ItemsDict = new();
     public List<SearchEntry> SearchEntries = new();
+    public ObservableCollection<DisplayItem> SearchResults = new();
+    public List<Item> SelectedItems = new();
 }
