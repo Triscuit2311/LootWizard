@@ -12,7 +12,7 @@ namespace LootWizard;
 
 public class CacheManager : IDisposable
 {
-    public static async Task Update( QuestsData questsData, ItemsData itemsData)
+    public static async Task Update(QuestsData questsData, ItemsData itemsData)
     {
         DateTime lastFetchTime = GetLastFetchTime();
         bool isCacheValid = DateTime.Now - lastFetchTime < CacheValidityDuration;
@@ -45,42 +45,42 @@ public class CacheManager : IDisposable
         var quests = CreateTasksFromJson(questsJson);
 
         questsData.QuestList = new List<Quest>(quests);
-        
+
         Console.WriteLine("Populating Item Objects");
         var items = CreateItemsFromJson(itemsJson);
-        
+
         PersistentItemManager.LoadUpdate();
 
         Console.WriteLine("Checking Image Cache..");
         int missing_imgs = 0;
 
         var default_color = Colors.Aqua;
-        
-        
+
+
         foreach (var item in items)
         {
             // add persistant data if needed
             PersistentItemManager.AddDoNotUpdate(item.id,
-                new PersistentItemData(item.id, default_color , false));
+                new PersistentItemData(item.id, default_color, false));
 
             // Updating items dict
-            itemsData.ItemsDict.Add(item.id,item);
-            
+            itemsData.ItemsDict.Add(item.id, item);
+
             // Init list for display
-            itemsData.SearchResults.Add(new DisplayItem(item,PersistentItemManager.Get(item.id)));
-            
+            itemsData.SearchResults.Add(new DisplayItem(item, PersistentItemManager.Get(item.id)));
+
             // updating item search
             itemsData.SearchEntries.Add(new ItemsData.SearchEntry(
                 item.searchable_short,
                 item.searchable_full,
                 item.id));
-            
+
             if (!CheckImageCache(item))
             {
                 missing_imgs++;
             }
         }
-        
+
         Console.WriteLine($"Missing images: {missing_imgs}/{items.Count}");
 
         if (missing_imgs > 0)

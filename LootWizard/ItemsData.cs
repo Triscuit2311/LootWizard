@@ -18,7 +18,7 @@ public class ItemsData
             id = itemId;
         }
     }
-    
+
     public Dictionary<string, Item> ItemsDict = new();
     public List<SearchEntry> SearchEntries = new();
     public ObservableCollection<DisplayItem> SearchResults = new();
