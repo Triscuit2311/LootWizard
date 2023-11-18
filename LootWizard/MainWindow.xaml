@@ -80,6 +80,8 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+
                             </Grid.ColumnDefinitions>
                             
                             <Grid Margin="5" VerticalAlignment="Top" HorizontalAlignment="Stretch">
@@ -90,11 +92,12 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                                     <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Price/Price-per-slot Filter -->
-                                <TextBox Grid.Column="0" x:Name="PriceFilterBox" Grid.Row="0" Margin="5,5,5,0" />
-                                <ComboBox Grid.Column="0"  x:Name="PriceFilterType" Grid.Row="1" Margin="5,5,5,0">
+                                <TextBox Grid.Column="0" x:Name="PriceFilterBox" Grid.Row="0" Margin="5,5,5,0" TextChanged="ApplyFilters"/>
+                                <ComboBox Grid.Column="0"  x:Name="PriceFilterType" Grid.Row="1" Margin="5,5,5,0" SelectionChanged="ApplyFilters">
                                     <ComboBoxItem Content="Filter by Price" />
                                     <ComboBoxItem Content="Filter by Price/Slot" />
                                 </ComboBox>
@@ -103,15 +106,29 @@
                                 <CheckBox Grid.Column="1" x:Name="FavoritesFilterCheckBox"
                                           Content="Filter by Favorites"
                                           Grid.Row="0"
-                                          Margin="5,5,5,0" />
+                                          Margin="5,5,5,0" Click="ApplyFilters"/>
                                 <CheckBox Grid.Column="1" x:Name="SelectedFilterCheckBox" Content="Filter by Selected"
                                           Grid.Row="1"
-                                          Margin="5,5,5,0" />
+                                          Margin="5,5,5,0" Click="ApplyFilters"/>
+                                
+                                <!-- -->
+                                <!-- <ComboBox Grid.Column="2" x:Name="TypeFilterType" Grid.Row="1" Margin="5,5,5,0" -->
+                                <!--           ItemsSource="{Binding Source={x:Static local:LootFilters.AvailableItemTypes}}" -->
+                                <!--           DisplayMemberPath="."> -->
+                                <!-- </ComboBox> -->
+
+                                
                             </Grid>
 
                             <!-- Search Button -->
-                            <Button Grid.Column="1" Content=" Apply Filters " Grid.Row="0" Margin="5,5,5,0"
-                                    Click="ApplyFiltersButton_Click" />
+                            <!-- <Button Grid.Column="1" Content=" Apply Filters " Grid.Row="0" Margin="5,5,5,0" -->
+                            <!--         Click="ApplyFilters" /> -->
+                            <!-- -->
+                            
+                            <Button Grid.Column="2" Content=" Generate Config " Grid.Row="0" Margin="5,5,5,0"
+                                    Click="GenerateButton_Click" />
+                            
+                            
                         </Grid>
                     </Grid>
 

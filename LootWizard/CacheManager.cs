@@ -66,6 +66,7 @@ public class CacheManager : IDisposable
             // Updating items dict
             itemsData.ItemsDict.Add(item.id,item);
             
+            // Init list for display
             itemsData.SearchResults.Add(new DisplayItem(item,PersistentItemManager.Get(item.id)));
             
             // updating item search

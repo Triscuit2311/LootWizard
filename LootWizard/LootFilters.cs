@@ -19,11 +19,6 @@ public static class LootFilters
         return new LootFilter(item => item.avg_price/(item.slots > 0 ? item.slots : 1) >= price);
     }
 
-    public static LootFilter FilterByItemType(string item_type)
-    {
-        return new LootFilter(item => item.item_types.Contains(item_type));
-    }
-
     public static LootFilter FilterByFavorites = new LootFilter(item => PersistentItemManager.Get(item.id).favorite);
     public static LootFilter FilterBySelected = new LootFilter(item => PersistentItemManager.Get(item.id).selected);
 }
