@@ -127,6 +127,7 @@
         <Compile Include="Item.cs" />
         <Compile Include="ItemsData.cs" />
         <Compile Include="LootConfigManager.cs" />
+        <Compile Include="LootFilters.cs" />
         <Compile Include="PersistantItemData.cs" />
         <Compile Include="Quest.cs" />
         <Compile Include="QuestsData.cs" />
