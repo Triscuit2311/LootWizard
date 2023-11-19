@@ -1,23 +1,9 @@
 ﻿using System.Windows.Media;
+
 namespace LootWizard;
 
 public record struct DisplayItem
 {
-    public Item item { get; set; }
-    public PersistentItemData itemData { get; set; }
-    public Brush brush { get; set; }
-
-    public string display_name{ get; set; }
-    public string display_price{ get; set; }
-    public string display_price_slot{ get; set; }
-    
-    
-    public static string StarActivePath { get; set; }
-    public static string StarInactivePath { get; set; }
-    
-    public static string CheckActivePath { get; set; }
-    public static string CheckInactivePath { get; set; }
-    
     public DisplayItem(Item _item, PersistentItemData _data)
     {
         item = _item;
@@ -25,7 +11,7 @@ public record struct DisplayItem
         brush = new SolidColorBrush(_data.color);
         display_name = $"{item.name}";
         display_price = $"{item.avg_price}\u20bd";
-        display_price_slot = $"({item.avg_price/(item.slots > 0 ? item.slots : 1)}\u20bd/slot)";
+        display_price_slot = $"({item.avg_price / (item.slots > 0 ? item.slots : 1)}\u20bd/slot)";
 
         if (StarActivePath == null)
         {
@@ -35,4 +21,19 @@ public record struct DisplayItem
             CheckInactivePath = FileHelpers.ResolveImagePath("img/check_inactive.png");
         }
     }
+
+    public Item item { get; set; }
+    public PersistentItemData itemData { get; set; }
+    public Brush brush { get; set; }
+
+    public string display_name { get; set; }
+    public string display_price { get; set; }
+    public string display_price_slot { get; set; }
+
+
+    public static string StarActivePath { get; set; }
+    public static string StarInactivePath { get; set; }
+
+    public static string CheckActivePath { get; set; }
+    public static string CheckInactivePath { get; set; }
 }

@@ -5,7 +5,10 @@ namespace LootWizard;
 
 public static class LootFilters
 {
-    public static List<LootFilter> ActiveFilters = new List<LootFilter>();
+    public static List<LootFilter> ActiveFilters = new();
+
+    public static LootFilter FilterByFavorites = new(item => PersistentItemManager.Get(item.id).favorite);
+    public static LootFilter FilterBySelected = new(item => PersistentItemManager.Get(item.id).selected);
 
     public static LootFilter FilterByPrice(int price)
     {
@@ -18,22 +21,19 @@ public static class LootFilters
         if (price <= 0) return new LootFilter(item => true);
         return new LootFilter(item => item.avg_price / (item.slots > 0 ? item.slots : 1) >= price);
     }
-
-    public static LootFilter FilterByFavorites = new LootFilter(item => PersistentItemManager.Get(item.id).favorite);
-    public static LootFilter FilterBySelected = new LootFilter(item => PersistentItemManager.Get(item.id).selected);
 }
 
 public class LootFilter
 {
-    private Func<Item, bool> criteria_check;
-
-    public bool MeetsCriteria(Item item)
-    {
-        return criteria_check(item);
-    }
+    private readonly Func<Item, bool> criteria_check;
 
     public LootFilter(Func<Item, bool> check)
     {
         criteria_check = check;
+    }
+
+    public bool MeetsCriteria(Item item)
+    {
+        return criteria_check(item);
     }
 }

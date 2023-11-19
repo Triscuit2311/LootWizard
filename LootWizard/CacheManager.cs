@@ -12,10 +12,70 @@ namespace LootWizard;
 
 public class CacheManager : IDisposable
 {
+    private const string ItemsCacheFile = "items_cache.json";
+    private const string QuestsCacheFile = "quests_cache.json";
+    private const string LastFetchFile = "last_fetch_time.txt";
+    private static readonly TimeSpan CacheValidityDuration = TimeSpan.FromHours(24);
+
+    private static readonly Dictionary<string, string> items_query = new()
+    {
+        {
+            "query", """
+                     {
+                       items {
+                           id
+                           name
+                           shortName
+                           iconLink
+                           avg24hPrice
+                           width
+                           height
+                         usedInTasks{
+                           id
+                         }
+                         types
+                         properties{
+                           __typename
+                         }
+                       }
+                     }
+                     """
+        }
+    };
+
+    private static readonly Dictionary<string, string> quests_query = new()
+    {
+        {
+            "query", """
+                     {tasks{
+                       id
+                       name
+                       trader{
+                         name
+                       }
+                       objectives{
+                         type
+                         ...on TaskObjectiveItem{
+                     			item{
+                             id
+                           }
+                           count
+                         }
+                       }
+                     }}
+                     """
+        }
+    };
+
+    public void Dispose()
+    {
+        // TODO release managed resources here
+    }
+
     public static async Task Update(QuestsData questsData, ItemsData itemsData)
     {
-        DateTime lastFetchTime = GetLastFetchTime();
-        bool isCacheValid = DateTime.Now - lastFetchTime < CacheValidityDuration;
+        var lastFetchTime = GetLastFetchTime();
+        var isCacheValid = DateTime.Now - lastFetchTime < CacheValidityDuration;
 
         string itemsJson, questsJson;
 
@@ -52,7 +112,7 @@ public class CacheManager : IDisposable
         PersistentItemManager.LoadUpdate();
 
         Console.WriteLine("Checking Image Cache..");
-        int missing_imgs = 0;
+        var missing_imgs = 0;
 
         var default_color = Colors.Aqua;
 
@@ -62,6 +122,7 @@ public class CacheManager : IDisposable
             // add persistant data if needed
             PersistentItemManager.AddDoNotUpdate(item.id,
                 new PersistentItemData(item.id, default_color, false));
+            if (PersistentItemManager.Get(item.id).selected) itemsData.SelectedItems[item.id] = item;
 
             // Updating items dict
             itemsData.ItemsDict.Add(item.id, item);
@@ -75,10 +136,7 @@ public class CacheManager : IDisposable
                 item.searchable_full,
                 item.id));
 
-            if (!CheckImageCache(item))
-            {
-                missing_imgs++;
-            }
+            if (!CheckImageCache(item)) missing_imgs++;
         }
 
         Console.WriteLine($"Missing images: {missing_imgs}/{items.Count}");
@@ -88,34 +146,23 @@ public class CacheManager : IDisposable
             Console.WriteLine("Downloading missing images, this could take a few minutes.");
             using (var httpClient = new HttpClient())
             {
-                foreach (var item in items)
-                {
-                    await CacheItemImage(httpClient, item);
-                }
+                foreach (var item in items) await CacheItemImage(httpClient, item);
             }
 
             Console.WriteLine("Images cached.");
         }
     }
 
-    private const string ItemsCacheFile = "items_cache.json";
-    private const string QuestsCacheFile = "quests_cache.json";
-    private const string LastFetchFile = "last_fetch_time.txt";
-    private static TimeSpan CacheValidityDuration = TimeSpan.FromHours(24);
-
     private static async Task CacheItemImage(HttpClient httpClient, Item item)
     {
-        string imgDirectory = "img";
-        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
+        var imgDirectory = "img";
+        var imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
 
         if (!File.Exists(imgPath))
         {
-            if (!Directory.Exists(imgDirectory))
-            {
-                Directory.CreateDirectory(imgDirectory);
-            }
+            if (!Directory.Exists(imgDirectory)) Directory.CreateDirectory(imgDirectory);
 
-            byte[] imageData = await httpClient.GetByteArrayAsync(item.icon_link);
+            var imageData = await httpClient.GetByteArrayAsync(item.icon_link);
 
             // Convert WebP to JPEG
             using (var webpImage = new MagickImage(imageData))
@@ -128,115 +175,54 @@ public class CacheManager : IDisposable
 
     private static bool CheckImageCache(Item item)
     {
-        string imgDirectory = "img";
-        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
+        var imgDirectory = "img";
+        var imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
 
         return File.Exists(imgPath);
     }
 
-    static Dictionary<string, string> items_query = new Dictionary<string, string>()
-    {
-        {
-            "query", """
-                     {
-                       items {
-                           id
-                           name
-                           shortName
-                           iconLink
-                           avg24hPrice
-                           width
-                           height
-                         usedInTasks{
-                           id
-                         }
-                         types
-                         properties{
-                           __typename
-                         }
-                       }
-                     }
-                     """
-        }
-    };
-
-    static Dictionary<string, string> quests_query = new Dictionary<string, string>()
-    {
-        {
-            "query", """
-                     {tasks{
-                       id
-                       name
-                       trader{
-                         name
-                       }
-                       objectives{
-                         type
-                         ...on TaskObjectiveItem{
-                     			item{
-                             id
-                           }
-                           count
-                         }
-                       }
-                     }}
-                     """
-        }
-    };
-
 
     public static List<Quest> CreateTasksFromJson(string json)
     {
-        List<Quest> quests = new List<Quest>();
+        var quests = new List<Quest>();
 
-        using (JsonDocument doc = JsonDocument.Parse(json))
+        using (var doc = JsonDocument.Parse(json))
         {
-            if (doc.RootElement.TryGetProperty("data", out JsonElement dataElement) &&
-                dataElement.TryGetProperty("tasks", out JsonElement tasksArray))
-            {
-                foreach (JsonElement taskElement in tasksArray.EnumerateArray())
-                {
+            if (doc.RootElement.TryGetProperty("data", out var dataElement) &&
+                dataElement.TryGetProperty("tasks", out var tasksArray))
+                foreach (var taskElement in tasksArray.EnumerateArray())
                     try
                     {
-                        if (taskElement.TryGetProperty("objectives", out JsonElement objectives))
-                        {
+                        if (taskElement.TryGetProperty("objectives", out var objectives))
                             if (objectives.EnumerateArray().Any(obj =>
-                                    obj.TryGetProperty("type", out JsonElement type) &&
+                                    obj.TryGetProperty("type", out var type) &&
                                     type.GetString() == "giveItem"))
                             {
-                                Quest task = new Quest(taskElement);
+                                var task = new Quest(taskElement);
                                 quests.Add(task);
                             }
-                        }
                     }
                     catch (Exception e)
                     {
                     }
-                }
-            }
             else
-            {
                 // Handle the case where the necessary properties are not found
                 Console.WriteLine("The required properties ('data' and 'tasks') are not present in the JSON.");
-            }
         }
-
 
         return quests;
     }
 
     public static List<Item> CreateItemsFromJson(string json)
     {
-        List<Item> items = new List<Item>();
+        var items = new List<Item>();
 
-        using (JsonDocument doc = JsonDocument.Parse(json))
+        using (var doc = JsonDocument.Parse(json))
         {
             // Check if the root element has the 'data' property and it contains 'items'
-            if (doc.RootElement.TryGetProperty("data", out JsonElement dataElement) &&
-                dataElement.TryGetProperty("items", out JsonElement itemsArray))
-            {
-                foreach (JsonElement itemElement in itemsArray.EnumerateArray())
-                {
+            if (doc.RootElement.TryGetProperty("data", out var dataElement) &&
+                dataElement.TryGetProperty("items", out var itemsArray))
+                foreach (var itemElement in itemsArray.EnumerateArray())
                     try
                     {
                         items.Add(new Item(itemElement));
@@ -246,13 +232,9 @@ public class CacheManager : IDisposable
                         // Handle other potential exceptions
                         //Console.WriteLine($"An unexpected error occurred: {ex.Message}");
                     }
-                }
-            }
             else
-            {
                 // Handle the case where the necessary properties are not found
                 Console.WriteLine("The required item properties are not present in the JSON.");
-            }
         }
 
         return items;
@@ -269,18 +251,10 @@ public class CacheManager : IDisposable
     {
         if (File.Exists(LastFetchFile))
         {
-            string lastFetchTimeString = File.ReadAllText(LastFetchFile);
-            if (DateTime.TryParse(lastFetchTimeString, out DateTime lastFetchTime))
-            {
-                return lastFetchTime;
-            }
+            var lastFetchTimeString = File.ReadAllText(LastFetchFile);
+            if (DateTime.TryParse(lastFetchTimeString, out var lastFetchTime)) return lastFetchTime;
         }
 
         return DateTime.MinValue;
-    }
-
-    public void Dispose()
-    {
-        // TODO release managed resources here
     }
 }

@@ -5,6 +5,11 @@ namespace LootWizard;
 
 public class ItemsData
 {
+    public Dictionary<string, Item> ItemsDict = new();
+    public List<SearchEntry> SearchEntries = new();
+    public ObservableCollection<DisplayItem> SearchResults = new();
+    public Dictionary<string, Item> SelectedItems = new();
+
     public struct SearchEntry
     {
         public string short_name;
@@ -18,9 +23,4 @@ public class ItemsData
             id = itemId;
         }
     }
-
-    public Dictionary<string, Item> ItemsDict = new();
-    public List<SearchEntry> SearchEntries = new();
-    public ObservableCollection<DisplayItem> SearchResults = new();
-    public List<Item> SelectedItems = new();
 }

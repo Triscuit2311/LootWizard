@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:LootWizard"
         mc:Ignorable="d"
         Title="MainWindow" Height="640" Width="720">
+
     <Grid>
         <TabControl TabStripPlacement="Left">
             <!-- TabControl Style -->
@@ -52,20 +53,18 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-
                         <Grid Grid.Row="0" Margin="5">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Grid.Row="0" x:Name="SearchBoxLabel" Content="Search: "
-                                   VerticalAlignment="Center">
-                            </Label>
+                                   VerticalAlignment="Center" />
                             <TextBox Grid.Column="1" Grid.Row="0" x:Name="SearchBox" HorizontalAlignment="Stretch"
                                      VerticalAlignment="Center"
                                      Margin="10,10,10,0"
@@ -78,9 +77,9 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
 
                             </Grid.ColumnDefinitions>
 
@@ -90,9 +89,9 @@
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
                                 <!-- Price/Price-per-slot Filter -->
@@ -196,7 +195,8 @@
 
 
                                     <ToggleButton Grid.Column="3" IsChecked="{Binding itemData.selected}"
-                                                  Margin="10,0,0,0" Width="24" Height="24" BorderThickness="0">
+                                                  Margin="10,0,0,0" Width="24" Height="24" BorderThickness="0"
+                                                  Checked="ToggleButton_OnChecked" Unchecked="ToggleButton_OnUnchecked">
                                         <ToggleButton.Style>
                                             <Style TargetType="ToggleButton">
                                                 <Setter Property="Background" Value="Transparent" />

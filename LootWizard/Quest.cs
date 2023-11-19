@@ -5,41 +5,40 @@ namespace LootWizard;
 
 public record struct Quest
 {
+    public string id;
+    public string name;
+    public List<RequiredItem> require_items;
+    public string searchable_name;
+    public string trader_name;
+
+    public Quest(JsonElement taskElement)
+    {
+        id = taskElement.GetProperty("id").GetString();
+        name = taskElement.GetProperty("name").GetString();
+        trader_name = taskElement.GetProperty("trader").GetProperty("name").GetString();
+        searchable_name = name.ToLower();
+
+        require_items = new List<RequiredItem>();
+        foreach (var objective in taskElement.GetProperty("objectives").EnumerateArray())
+            if (objective.GetProperty("type").GetString() == "giveItem")
+            {
+                var itemId = objective.GetProperty("item").GetProperty("id").GetString();
+                var itemCount = objective.GetProperty("count").GetInt32();
+                require_items.Add(new RequiredItem(itemId, itemCount));
+            }
+    }
+
     public struct RequiredItem
     {
         public string id;
         public int count;
+
         public RequiredItem(string id, int count)
         {
             this.id = id;
             this.count = count;
         }
     }
-    public string id;
-    public string name;
-    public string trader_name;
-    public string searchable_name;
-    public List<RequiredItem> require_items;
-    
-    public Quest(JsonElement taskElement)
-    {
-        this.id = taskElement.GetProperty("id").GetString();
-        this.name = taskElement.GetProperty("name").GetString();
-        this.trader_name = taskElement.GetProperty("trader").GetProperty("name").GetString();
-        this.searchable_name = name.ToLower();
-
-        this.require_items = new List<RequiredItem>();
-        foreach (var objective in taskElement.GetProperty("objectives").EnumerateArray())
-        {
-            if (objective.GetProperty("type").GetString() == "giveItem")
-            {
-                string itemId = objective.GetProperty("item").GetProperty("id").GetString();
-                int itemCount = objective.GetProperty("count").GetInt32();
-                this.require_items.Add(new RequiredItem(itemId, itemCount));
-            }
-        }
-    }
-    
 }
 
 //
