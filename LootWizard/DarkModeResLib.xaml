@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Define your dark theme colors -->
+    <Color x:Key="PrimaryColor">#FF303030</Color>
+    <Color x:Key="SecondaryColor">#FF505050</Color>
+    <Color x:Key="TextColor">#FFFFFF</Color>
+    <Color x:Key="AccentColor">#FF007ACC</Color>
+    
+    <!-- Define brushes using the above colors -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}" />
+    <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+    <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+
+    <!-- Define other resources: styles, templates, etc. -->
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+    </Style>
+
+</ResourceDictionary>

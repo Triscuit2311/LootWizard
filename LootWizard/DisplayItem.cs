@@ -13,6 +13,15 @@ public record struct DisplayItem
         display_price = $"{item.avg_price}\u20bd";
         display_price_slot = $"({item.avg_price / (item.slots > 0 ? item.slots : 1)}\u20bd/slot)";
         img_res = $"pack://application:,,,/LootWizard;component/resources/eft/items/{item.id}-icon.jpeg";
+        PersistentItemManager.ItemChanged += OnPersistentItemChanged;
+    }
+
+    private void OnPersistentItemChanged(object sender, ItemChangedEventArgs e)
+    {
+        if (e.ItemId == itemData.id)
+        {
+            itemData.selected = e.IsSelected;
+        }
     }
 
     public string img_res { get; set; }

@@ -6,11 +6,36 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Media;
-
+//using ImageMagick;
 namespace LootWizard;
 
 public class CacheManager : IDisposable
 {
+    
+    // private static async Task CacheItemImage(HttpClient httpClient, Item item)
+    // {
+    //     string imgDirectory = "img";
+    //     string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
+    //
+    //     if (!File.Exists(imgPath))
+    //     {
+    //         if (!Directory.Exists(imgDirectory))
+    //         {
+    //             Directory.CreateDirectory(imgDirectory);
+    //         }
+    //
+    //         byte[] imageData = await httpClient.GetByteArrayAsync(item.icon_link);
+    //
+    //         // Convert WebP to JPEG
+    //         using (var webpImage = new MagickImage(imageData))
+    //         {
+    //             webpImage.Format = MagickFormat.Jpeg;
+    //             webpImage.Write(imgPath); // This saves the image in JPEG format
+    //         }
+    //     }
+    // }
+    //
+    
     private const string ItemsCacheFile = "items_cache.json";
     private const string QuestsCacheFile = "quests_cache.json";
     private const string LastFetchFile = "last_fetch_time.txt";
@@ -68,7 +93,6 @@ public class CacheManager : IDisposable
 
     public void Dispose()
     {
-        // TODO release managed resources here
     }
 
     public static async Task Update(QuestsData questsData, ItemsData itemsData)
@@ -100,28 +124,10 @@ public class CacheManager : IDisposable
         }
 
 
-        Console.WriteLine("Populating Quest Objects");
-        var quests = CreateTasksFromJson(questsJson);
-
-        questsData.QuestList = new List<Quest>(quests);
-
-
-
-        foreach (var quest in quests)
-        {
-            // add persistant data if needed
-            PersistentQuestManager.AddDoNotUpdate(quest.id,
-                new PersistentQuestData(quest.id, false, new Dictionary<string, int>()));
-        }
-
         Console.WriteLine("Populating Item Objects");
         var items = CreateItemsFromJson(itemsJson);
 
         PersistentItemManager.LoadUpdate();
-        PersistentQuestManager.LoadUpdate();
-
-        Console.WriteLine("Checking Image Cache..");
-        //var missing_imgs = 0;
 
         var defaultColor = Colors.Aqua;
 
@@ -134,7 +140,7 @@ public class CacheManager : IDisposable
             if (PersistentItemManager.Get(item.id).selected) itemsData.SelectedItems[item.id] = item;
 
             // Updating items dict
-            itemsData.ItemsDict.Add(item.id, item);
+            ItemsData.ItemsDict.Add(item.id, item);
 
             // Init list for display
             itemsData.SearchResults.Add(new DisplayItem(item, PersistentItemManager.Get(item.id)));
@@ -144,9 +150,39 @@ public class CacheManager : IDisposable
                 item.searchable_short,
                 item.searchable_full,
                 item.id));
-            
         }
 
+        
+        // Console.WriteLine("STARTING IMAGE CACHE");
+        // using (var httpClient = new HttpClient())
+        // {
+        //     foreach (var item in items)
+        //     {
+        //         await CacheItemImage(httpClient, item);
+        //     }
+        // }
+        
+
+
+
+        Console.WriteLine("Populating Quest Objects");
+        var quests = CreateTasksFromJson(questsJson);
+
+        QuestsData.QuestList = new Dictionary<string, Quest>();
+
+        PersistentQuestManager.LoadUpdate();
+
+        foreach (var quest in quests)
+        {
+            QuestsData.QuestList.Add(quest.id, quest);
+
+            // add persistant data if needed
+            PersistentQuestManager.AddDoNotUpdate(quest.id,
+                new PersistentQuestData(quest.id, false, new Dictionary<string, int>()));
+            questsData.DisplayQuests.Add(new DisplayQuest(quest, PersistentQuestManager.Get(quest.id)));
+        }
+
+        questsData.BuildQuestPools();
     }
 
     public static List<Quest> CreateTasksFromJson(string json)
@@ -183,29 +219,45 @@ public class CacheManager : IDisposable
     public static List<Item> CreateItemsFromJson(string json)
     {
         var items = new List<Item>();
+        const int ContextLength = 50; // Length of JSON context to display in case of an error
 
         using (var doc = JsonDocument.Parse(json))
         {
-            // Check if the root element has the 'data' property and it contains 'items'
             if (doc.RootElement.TryGetProperty("data", out var dataElement) &&
                 dataElement.TryGetProperty("items", out var itemsArray))
+            {
                 foreach (var itemElement in itemsArray.EnumerateArray())
+                {
                     try
                     {
                         items.Add(new Item(itemElement));
                     }
                     catch (Exception ex)
                     {
-                        // Handle other potential exceptions
-                        //Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                        // Extract the JSON snippet around the error location
+                        string jsonContext = ExtractJsonContext(itemElement.GetRawText(), ContextLength);
+                        Console.WriteLine($"Error parsing item: {ex.Message}");
+                        Console.WriteLine($"JSON context: {jsonContext}");
                     }
+                }
+            }
             else
-                // Handle the case where the necessary properties are not found
+            {
                 Console.WriteLine("The required item properties are not present in the JSON.");
+            }
         }
 
         return items;
     }
+
+    private static string ExtractJsonContext(string jsonSnippet, int contextLength)
+    {
+        // Ensure the snippet length is within the bounds of the actual JSON string
+        return jsonSnippet.Length <= contextLength * 2
+            ? jsonSnippet
+            : jsonSnippet.Substring(0, contextLength) + "..." + jsonSnippet.Substring(jsonSnippet.Length - contextLength);
+    }
+
 
 
     private static async Task<string> FetchData(HttpClient httpClient, Dictionary<string, string> query)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using System.Windows.Media;
@@ -17,6 +18,7 @@ public static class PersistentItemManager
     public static void SetSelected(string id, bool selected)
     {
         Map[id].selected = selected;
+        NotifyItemChanged(id,selected);
     }
 
 
@@ -68,6 +70,25 @@ public static class PersistentItemManager
 
         var json = File.ReadAllText(filePath);
         return JsonSerializer.Deserialize<Dictionary<string, PersistentItemData>>(json);
+    }
+    
+    public static event EventHandler<ItemChangedEventArgs> ItemChanged;
+
+    public static void NotifyItemChanged(string itemId, bool isSelected)
+    {
+        ItemChanged?.Invoke(null, new ItemChangedEventArgs(itemId, isSelected));
+    }
+}
+
+public class ItemChangedEventArgs : EventArgs
+{
+    public string ItemId { get; private set; }
+    public bool IsSelected { get; private set; }
+
+    public ItemChangedEventArgs(string itemId, bool isSelected)
+    {
+        ItemId = itemId;
+        IsSelected = isSelected;
     }
 }
 

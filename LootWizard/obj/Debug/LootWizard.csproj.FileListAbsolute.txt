@@ -41,3 +41,11 @@ C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.csproj.Core
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.csproj.CopyComplete
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.exe
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\LootWizard.pdb
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.Native-Q8-arm64.dll
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.Native-Q8-x64.dll
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.Native-Q8-x86.dll
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET-Q8-AnyCPU.dll
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET.Core.dll
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET-Q8-AnyCPU.xml
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET.Core.xml
+C:\Users\dt\RiderProjects\LootWizard\LootWizard\obj\Debug\DarkModeResLib.baml

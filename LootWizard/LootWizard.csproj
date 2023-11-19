@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-    <Import Project="..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props')"/>
-    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <Import Project="..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.props" Condition="Exists('..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.props')" />
+    <Import Project="..\packages\ILRepack.2.0.18\build\ILRepack.props" Condition="Exists('..\packages\ILRepack.2.0.18\build\ILRepack.props')" />
+    <Import Project="..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props" Condition="Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props')" />
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
     <PropertyGroup>
         <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
         <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -42,21 +44,21 @@
         <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
         </Reference>
-        <Reference Include="mscorlib"/>
-        <Reference Include="netstandard"/>
+        <Reference Include="mscorlib" />
+        <Reference Include="netstandard" />
         <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
             <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
         </Reference>
         <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
             <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
         </Reference>
-        <Reference Include="System"/>
+        <Reference Include="System" />
         <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
         </Reference>
-        <Reference Include="System.ComponentModel.Composition"/>
-        <Reference Include="System.Core"/>
-        <Reference Include="System.Data"/>
+        <Reference Include="System.ComponentModel.Composition" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
         <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
             <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
         </Reference>
@@ -69,7 +71,7 @@
         <Reference Include="System.Net.Http.Formatting, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
             <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.6.0.0\lib\net45\System.Net.Http.Formatting.dll</HintPath>
         </Reference>
-        <Reference Include="System.Numerics"/>
+        <Reference Include="System.Numerics" />
         <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
             <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
         </Reference>
@@ -103,31 +105,32 @@
         <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
             <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
         </Reference>
-        <Reference Include="System.Xml"/>
+        <Reference Include="System.Xml" />
         <Reference Include="System.Xaml">
             <RequiredTargetFramework>4.0</RequiredTargetFramework>
         </Reference>
-        <Reference Include="WindowsBase"/>
-        <Reference Include="PresentationCore"/>
-        <Reference Include="PresentationFramework"/>
+        <Reference Include="WindowsBase" />
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
         </ApplicationDefinition>
-        <Compile Include="CacheManager.cs"/>
-        <Compile Include="DisplayItem.cs"/>
+        <Compile Include="CacheManager.cs" />
+        <Compile Include="DisplayItem.cs" />
         <Compile Include="DisplayQuest.cs" />
-        <Compile Include="FileHelpers.cs"/>
-        <Compile Include="Item.cs"/>
-        <Compile Include="ItemsData.cs"/>
-        <Compile Include="LootConfigManager.cs"/>
-        <Compile Include="LootFilters.cs"/>
-        <Compile Include="PersistantItemData.cs"/>
-        <Compile Include="PersistentQuestData.cs"/>
-        <Compile Include="Quest.cs"/>
-        <Compile Include="QuestsData.cs"/>
+        <Compile Include="FileHelpers.cs" />
+        <Compile Include="Item.cs" />
+        <Compile Include="ItemsData.cs" />
+        <Compile Include="LootConfigManager.cs" />
+        <Compile Include="LootFilters.cs" />
+        <Compile Include="PersistantItemData.cs" />
+        <Compile Include="PersistentQuestData.cs" />
+        <Compile Include="Quest.cs" />
+        <Compile Include="QuestsData.cs" />
+        <Page Include="DarkModeResLib.xaml" />
         <Page Include="MainWindow.xaml">
             <Generator>MSBuild:Compile</Generator>
             <SubType>Designer</SubType>
@@ -156,14 +159,25 @@
         </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
-        <None Include="packages.config"/>
+        <None Include="App.config" />
+        <None Include="packages.config" />
     </ItemGroup>
     <ItemGroup>
       <Resource Include="resources\icons\check_active.png" />
       <Resource Include="resources\icons\check_inactive.png" />
       <Resource Include="resources\icons\star_active.png" />
       <Resource Include="resources\icons\star_inactive.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="resources\eft\traders\Fence.png" />
+      <Resource Include="resources\eft\traders\Jaeger.png" />
+      <Resource Include="resources\eft\traders\Lightkeeper.png" />
+      <Resource Include="resources\eft\traders\Mechanic.png" />
+      <Resource Include="resources\eft\traders\Peacekeeper.png" />
+      <Resource Include="resources\eft\traders\Prapor.png" />
+      <Resource Include="resources\eft\traders\Ragman.png" />
+      <Resource Include="resources\eft\traders\Skier.png" />
+      <Resource Include="resources\eft\traders\Therapist.png" />
     </ItemGroup>
     <ItemGroup>
       <Resource Include="resources\eft\items\5a0abb6e1526d8000a025282-icon.jpeg" />
@@ -2900,18 +2914,456 @@
       <Resource Include="resources\eft\items\sksintrafuse000000000001-icon.jpeg" />
       <Resource Include="resources\eft\items\vepruntersvd000000000001-icon.jpeg" />
       <Resource Include="resources\eft\items\vssvintorezstripped00001-icon.jpeg" />
+      <Resource Include="resources\eft\items\5447ac644bdc2d6c208b4567-icon.jpeg" />
+      <Resource Include="resources\eft\items\5449016a4bdc2d6f028b456f-icon.jpeg" />
+      <Resource Include="resources\eft\items\544fb5454bdc2df8738b456a-icon.jpeg" />
+      <Resource Include="resources\eft\items\560d75f54bdc2da74d8b4573-icon.jpeg" />
+      <Resource Include="resources\eft\items\5649ed104bdc2d3d1c8b458b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5672cb124bdc2d1a0f8b4568-icon.jpeg" />
+      <Resource Include="resources\eft\items\5672cb304bdc2dc2088b456a-icon.jpeg" />
+      <Resource Include="resources\eft\items\5672cb724bdc2dc2088b456b-icon.jpeg" />
+      <Resource Include="resources\eft\items\56742c284bdc2d98058b456d-icon.jpeg" />
+      <Resource Include="resources\eft\items\56742c2e4bdc2d95058b456d-icon.jpeg" />
+      <Resource Include="resources\eft\items\56742c324bdc2d150f8b456d-icon.jpeg" />
+      <Resource Include="resources\eft\items\5696686a4bdc2da3298b456a-icon.jpeg" />
+      <Resource Include="resources\eft\items\569668774bdc2da2298b4568-icon.jpeg" />
+      <Resource Include="resources\eft\items\572b7d8524597762b472f9d1-icon.jpeg" />
+      <Resource Include="resources\eft\items\572b7f1624597762ae139822-icon.jpeg" />
+      <Resource Include="resources\eft\items\572b7fa124597762b472f9d2-icon.jpeg" />
+      <Resource Include="resources\eft\items\572b7fa524597762b747ce82-icon.jpeg" />
+      <Resource Include="resources\eft\items\5733279d245977289b77ec24-icon.jpeg" />
+      <Resource Include="resources\eft\items\573474f924597738002c6174-icon.jpeg" />
+      <Resource Include="resources\eft\items\5734758f24597738025ee253-icon.jpeg" />
+      <Resource Include="resources\eft\items\573475fb24597737fb1379e1-icon.jpeg" />
+      <Resource Include="resources\eft\items\573476d324597737da2adc13-icon.jpeg" />
+      <Resource Include="resources\eft\items\573476f124597737e04bf328-icon.jpeg" />
+      <Resource Include="resources\eft\items\5734770f24597738025ee254-icon.jpeg" />
+      <Resource Include="resources\eft\items\5734779624597737e04bf329-icon.jpeg" />
+      <Resource Include="resources\eft\items\573477e124597737dd42e191-icon.jpeg" />
+      <Resource Include="resources\eft\items\5734781f24597737e04bf32a-icon.jpeg" />
+      <Resource Include="resources\eft\items\573478bc24597738002c6175-icon.jpeg" />
+      <Resource Include="resources\eft\items\5734795124597738002c6176-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347b8b24597737dd42e192-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347baf24597738002c6178-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347c1124597737fb1379e3-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347c2e24597744902c94a1-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347c5b245977448d35f6e1-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347c77245977448d35f6e2-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347c93245977448d35f6e3-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347ca924597744596b4e71-icon.jpeg" />
+      <Resource Include="resources\eft\items\57347cd0245977445a2d6ff1-icon.jpeg" />
+      <Resource Include="resources\eft\items\573722e82459776104581c21-icon.jpeg" />
+      <Resource Include="resources\eft\items\573724b42459776125652ac2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737250c2459776125652acc-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737256c2459776125652acd-icon.jpeg" />
+      <Resource Include="resources\eft\items\573725b0245977612125bae2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737260b24597761224311f2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737266524597761006c6a8c-icon.jpeg" />
+      <Resource Include="resources\eft\items\573726d824597765d96be361-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737273924597765dd374461-icon.jpeg" />
+      <Resource Include="resources\eft\items\573727c624597765cc785b5b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737280e24597765cc785b5c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737287724597765e1625ae2-icon.jpeg" />
+      <Resource Include="resources\eft\items\573728cc24597765cc785b5d-icon.jpeg" />
+      <Resource Include="resources\eft\items\573728f324597765e5728561-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737292724597765e5728562-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372ac324597767001bc261-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372b832459776701014e41-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372bd3245977670b7cd243-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372c21245977670937c6c2-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372c89245977685d4159b1-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372d4c245977685a3da2a1-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372db0245977685d4159b2-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372deb245977685d4159b3-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372e4a24597768553071c2-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372e73245977685d4159b4-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372ebf2459776862260582-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372ee1245977685d4159b5-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372f5c24597769917c0131-icon.jpeg" />
+      <Resource Include="resources\eft\items\57372fc52459776998772ca1-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737300424597769942d5a01-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737330a2459776af32363a1-icon.jpeg" />
+      <Resource Include="resources\eft\items\5737339e2459776af261abeb-icon.jpeg" />
+      <Resource Include="resources\eft\items\573733c72459776b0b7b51b0-icon.jpeg" />
+      <Resource Include="resources\eft\items\5739d41224597779c3645501-icon.jpeg" />
+      <Resource Include="resources\eft\items\574eb85c245977648157eec3-icon.jpeg" />
+      <Resource Include="resources\eft\items\577e1c9d2459773cd707c525-icon.jpeg" />
+      <Resource Include="resources\eft\items\5798a2832459774b53341029-icon.jpeg" />
+      <Resource Include="resources\eft\items\5900b89686f7744e704a8747-icon.jpeg" />
+      <Resource Include="resources\eft\items\5909e99886f7740c983b9984-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a358486f77429692b2790-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a373286f774287540368b-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a386e86f77429692b27ab-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a391c86f774385a33c404-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a3b0486f7743954552bdb-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a3c0a86f774385a33c450-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a3cd386f77436f20848cb-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a3d9c86f774385926e510-icon.jpeg" />
+      <Resource Include="resources\eft\items\590a3efd86f77437d351a25b-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c2b4386f77425357b6123-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c2c9c86f774245b1f03f2-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c2d8786f774245b1f03f3-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c2e1186f77425357b6124-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c311186f77424d1667482-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c31c586f774245e3141b2-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c346786f77423e50ed342-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c35a486f774273531c822-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c37d286f77443be3d7827-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c392f86f77444754deb29-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c595c86f7747884343ad7-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c5a7286f7747884343aea-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c5bbd86f774785762df04-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c5c9f86f77477c91c36e7-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c621186f774138d11ea29-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c639286f774151567fa95-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c645c86f77412b01304d9-icon.jpeg" />
+      <Resource Include="resources\eft\items\590c651286f7741e566b6461-icon.jpeg" />
+      <Resource Include="resources\eft\items\590de71386f774347051a052-icon.jpeg" />
+      <Resource Include="resources\eft\items\590de7e986f7741b096e5f32-icon.jpeg" />
+      <Resource Include="resources\eft\items\591094e086f7747caa7bb2ef-icon.jpeg" />
+      <Resource Include="resources\eft\items\5910968f86f77425cf569c32-icon.jpeg" />
+      <Resource Include="resources\eft\items\5991b51486f77447b112d44f-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e3556c86f7741776641ac2-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e358a886f7741776641ac3-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e3596386f774176c10a2a2-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e35abd86f7741778269d82-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e35cbb86f7741778269d83-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e35de086f7741778269d84-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e35ef086f7741777737012-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e3606886f77417674759a5-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e361e886f774176c10a2a5-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e3639286f7741777737013-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e3647686f774176a362507-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e3658a86f7741776641ac4-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e366c186f7741778269d85-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e36c6f86f774176c10a2a7-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e7708286f7742cbd762753-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e770f986f7742cbe3164ef-icon.jpeg" />
+      <Resource Include="resources\eft\items\59e7715586f7742ee5789605-icon.jpeg" />
+      <Resource Include="resources\eft\items\59f32bb586f774757e1e8442-icon.jpeg" />
+      <Resource Include="resources\eft\items\59f32c3b86f77472a31742f0-icon.jpeg" />
+      <Resource Include="resources\eft\items\59faf7ca86f7740dbe19f6c2-icon.jpeg" />
+      <Resource Include="resources\eft\items\59faf98186f774067b6be103-icon.jpeg" />
+      <Resource Include="resources\eft\items\59fafb5d86f774067a6f2084-icon.jpeg" />
+      <Resource Include="resources\eft\items\59faff1d86f7746c51718c9c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5a16bb52fcdbcb001a3b00dc-icon.jpeg" />
+      <Resource Include="resources\eft\items\5a43943586f77416ad2f06e2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5a43957686f7742a2c2f11b0-icon.jpeg" />
+      <Resource Include="resources\eft\items\5a8036fb86f77407252ddc02-icon.jpeg" />
+      <Resource Include="resources\eft\items\5a80a29286f7742b25692012-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2a7e8e5b5b00016327c16-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2b87de5b5b00016327c25-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2b89be5b5b0001569311f-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2b8d7e5b5b00014028f4a-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2b9ede5b5b000137b758b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2ba19e5b5b00014028f4e-icon.jpeg" />
+      <Resource Include="resources\eft\items\5aa2ba46e5b5b000137b758d-icon.jpeg" />
+      <Resource Include="resources\eft\items\5ab8f20c86f7745cdb629fb2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5ab8f39486f7745cd93a1cca-icon.jpeg" />
+      <Resource Include="resources\eft\items\5ab8f4ff86f77431c60d91ba-icon.jpeg" />
+      <Resource Include="resources\eft\items\5ab8f85d86f7745cd93a1cf5-icon.jpeg" />
+      <Resource Include="resources\eft\items\5ac78a9b86f7741cca0bbd8d-icon.jpeg" />
+      <Resource Include="resources\eft\items\5af0484c86f7740f02001f7f-icon.jpeg" />
+      <Resource Include="resources\eft\items\5af04b6486f774195a3ebb49-icon.jpeg" />
+      <Resource Include="resources\eft\items\5af0534a86f7743b6f354284-icon.jpeg" />
+      <Resource Include="resources\eft\items\5af0561e86f7745f5f3ad6ac-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b3f16c486f7747c327f55f7-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b3f3ade86f7746b6b790d8e-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b3f3af486f774679e752c1f-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b3f3b0186f774021a2afef7-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b3f3b0e86f7746752107cda-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b40e5e25acfc4001a599bea-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b40e61f5acfc4001a599bec-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b4325355acfc40019478126-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b4326435acfc433000ed01d-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b43271c5acfc432ff4dce65-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b4327aa5acfc400175496e0-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b4329075acfc400153b78ff-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b432b6c5acfc4001a599bf0-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b432c305acfc40019478128-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b432f3d5acfc4704b4a1dfb-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b4335ba86f7744d2837a264-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b43575a86f77424f443fe62-icon.jpeg" />
+      <Resource Include="resources\eft\items\5b4391a586f7745321235ab2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9b355d4351e6d1509862a-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9b720d4351e450201234b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9b9ecd4351e3bac122519-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9bc53d4351e00367fbcee-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9bdb8d4351e003562b8a1-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9be8fd4351e00334cae6e-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9c049d4351e44f824d360-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bc9c377d4351e3bac12251b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bd06f5d86f77427101ad47c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bd0716d86f774171822ef4b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bd071d786f7747e707b93a3-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bd073a586f7747e6f135799-icon.jpeg" />
+      <Resource Include="resources\eft\items\5bd073c986f7747f627e796c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5be4038986f774527d3fae60-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c052e6986f7746b207bc3c9-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c052f6886f7746b1e3db148-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c052fb986f7746b2101e909-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c05300686f7746dce784e5d-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c05308086f7746b2101e90b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c0530ee86f774697952d952-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c066ef40db834001966a595-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c06779c86f77426e00dd782-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c06782b86f77426df5407d2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c110624d174af029e69734c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c11279ad174af029d64592b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1127bdd174af44217ab8b9-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1127d0d174af29be75cf68-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1260dc86f7746b106e8748-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c12613b86f7743bbe2c3f76-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c12619186f7743f871c8a32-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c12620d86f7743f8b198b72-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1262a286f7743f8a69aab2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1265fc86f7743f896a21c2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1267ee86f77416ec610f72-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c12688486f77426843c7d32-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c13cd2486f774072c757944-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c13cef886f774072e618e82-icon.jpeg" />
+      <Resource Include="resources\eft\items\5c1a1e3f2e221602b66cc4c2-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d0375ff86f774186372f685-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d0376a486f7747d8050965c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d03775b86f774203e7e0c4b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d0377ce86f774186372f689-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d03784a86f774203e7e0c4d-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d0378d486f77420421a5ff4-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d03794386f77420415576f5-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d0379a886f77420407aa271-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b2fa286f77425227d1674-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b2ffd86f77425243e8d17-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b304286f774253763a528-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b309586f77425227d1676-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b313086f77425227d1678-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b317c86f7742523398392-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b31ce86f7742523398394-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b327086f7742525194449-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b32c186f774252167a530-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b392c86f77425243e98fe-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b39a386f774252339976f-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b3a5d86f774252167ba22-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1b3f2d86f774253763b735-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1c774f86f7746d6620f8db-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d1c819a86f774771b0acd6c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d235a5986f77443f6329bc6-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d235b4d86f7742e017bc88a-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d40412b86f7743cb332ac3a-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d40419286f774318526545f-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d4041f086f7743cac3f22a7-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d40425986f7743185265461-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d4042a986f7743185265463-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d63d33b86f7746ea9275524-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d6d3943a4b9360dbc46d0cc-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d6fc78386f77449d825f9dc-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d6fc87386f77449db3db94e-icon.jpeg" />
+      <Resource Include="resources\eft\items\5d96141523f0ea1b7f2aacab-icon.jpeg" />
+      <Resource Include="resources\eft\items\5df8a6a186f77412640e2e80-icon.jpeg" />
+      <Resource Include="resources\eft\items\5df8a72c86f77412640e2e83-icon.jpeg" />
+      <Resource Include="resources\eft\items\5df8a77486f77412672a1e3f-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2aedd986f7746d404f3aa4-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2aee0a86f774755a234b62-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2aef7986f7746d3f3c33f5-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af00086f7746d3f3c33f7-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af02c86f7746d420957d4-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af22086f7746d3f3c33fa-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af29386f7746d4159f077-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af2bc86f7746d3f3c33fc-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af37686f774755a234b65-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af41e86f774755a234b67-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af47786f7746d404f3aaa-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af4a786f7746d3f3c3400-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af4d286f7746d4159f07a-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e2af51086f7746d3f3c3402-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e54f62086f774219b0f1937-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e54f6af86f7742199090bf3-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e54f76986f7740366043752-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e54f79686f7744022011103-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e71f6be86f77429f2683c44-icon.jpeg" />
+      <Resource Include="resources\eft\items\5e71fad086f77422443d4604-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f4f9eb969cdc30ff33f09db-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f60e6403b85f6263c14558c-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f60e7788adaa7100c3adb49-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f60e784f2bcbb675b00dac7-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f745ee30acaeb0d490d8c5b-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f99418230835532b445e954-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f994730c91ed922dd355de3-icon.jpeg" />
+      <Resource Include="resources\eft\items\5f9949d869e2777a0e779ba5-icon.jpeg" />
+      <Resource Include="resources\eft\items\5fd8d28367cb5e077335170f-icon.jpeg" />
+      <Resource Include="resources\eft\items\603618feffd42c541047f771-icon.jpeg" />
+      <Resource Include="resources\eft\items\603619720ca681766b6a0fc4-icon.jpeg" />
+      <Resource Include="resources\eft\items\60361a7497633951dc245eb4-icon.jpeg" />
+      <Resource Include="resources\eft\items\60361b0b5a45383c122086a1-icon.jpeg" />
+      <Resource Include="resources\eft\items\60361b5a9a15b10d96792291-icon.jpeg" />
+      <Resource Include="resources\eft\items\60363c0c92ec1c31037959f5-icon.jpeg" />
+      <Resource Include="resources\eft\items\60391a8b3364dc22b04d0ce5-icon.jpeg" />
+      <Resource Include="resources\eft\items\60391afc25aff57af81f7085-icon.jpeg" />
+      <Resource Include="resources\eft\items\60391b0fb847c71012789415-icon.jpeg" />
+      <Resource Include="resources\eft\items\6040de02647ad86262233012-icon.jpeg" />
+      <Resource Include="resources\eft\items\607f201b3c672b3b3a24a800-icon.jpeg" />
+      <Resource Include="resources\eft\items\60a7acf20c5cb24b01346648-icon.jpeg" />
+      <Resource Include="resources\eft\items\60b0f561c4449e4cb624c1d7-icon.jpeg" />
+      <Resource Include="resources\eft\items\60b0f7057897d47c5b04ab94-icon.jpeg" />
+      <Resource Include="resources\eft\items\60b0f988c4449e4cb624c1da-icon.jpeg" />
+      <Resource Include="resources\eft\items\60b52e5bc7d8103275739d67-icon.jpeg" />
+      <Resource Include="resources\eft\items\61605e13ffa6e502ac5e7eef-icon.jpeg" />
+      <Resource Include="resources\eft\items\6176a40f0b8c0312ac75a3d3-icon.jpeg" />
+      <Resource Include="resources\eft\items\6176a48d732a664031271438-icon.jpeg" />
+      <Resource Include="resources\eft\items\618aef6d0a5a59657e5f55ee-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bc61e86e01e16f839a999-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bdd8886e01e16f839a99c-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bddc6c9546643a67df6ee-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bddffc9546643a67df6f0-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bde3dc9546643a67df6f2-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bde7fc9546643a67df6f4-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bdeb986e01e16f839a99e-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bdef8c9546643a67df6f6-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bdf9cc9546643a67df6f8-icon.jpeg" />
+      <Resource Include="resources\eft\items\619bdfd4c9546643a67df6fa-icon.jpeg" />
+      <Resource Include="resources\eft\items\619cbf476b8a1b37a54eebf8-icon.jpeg" />
+      <Resource Include="resources\eft\items\619cbfccbedcde2f5b3f7bdd-icon.jpeg" />
+      <Resource Include="resources\eft\items\619cbfeb6b8a1b37a54eebfa-icon.jpeg" />
+      <Resource Include="resources\eft\items\619cc01e0a7c3a1a2731940c-icon.jpeg" />
+      <Resource Include="resources\eft\items\61bf7b6302b3924be92fa8c3-icon.jpeg" />
+      <Resource Include="resources\eft\items\61bf7c024770ee6f9c6b8b53-icon.jpeg" />
+      <Resource Include="resources\eft\items\61bf83814088ec1a363d7097-icon.jpeg" />
+      <Resource Include="resources\eft\items\61c18db6dfd64163ea78fbb4-icon.jpeg" />
+      <Resource Include="resources\eft\items\628e4dd1f477aa12234918aa-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a08f4c4f842e1bd12d9d62-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a091170b9d3c46de5b6cf2-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a09cb7a04c0c5c6e0a84f8-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a09cfe4f842e1bd12da3e4-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a09dd4621468534a797ac7-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a09e73af34e73a266d932a-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a09e974f842e1bd12da3f0-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a09ee4cf4a99369e262453-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a0a043cf4a99369e2624a5-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a0a098de7ac8199358053b-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a0a0bb621468534a797ad5-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a0a124de7ac81993580542-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a0a16d0b9d3c46de5b6e97-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a5c2c98ec41a51b34739c0-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a5c333ec21e50cad3b5dc6-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a5c41e8ec41a51b34739c3-icon.jpeg" />
+      <Resource Include="resources\eft\items\62a61bbf8ec41a51b34758d2-icon.jpeg" />
+      <Resource Include="resources\eft\items\62e910aaf957f2915e0a5e36-icon.jpeg" />
+      <Resource Include="resources\eft\items\634959225289190e5e773b3b-icon.jpeg" />
+      <Resource Include="resources\eft\items\635267ab3c89e2112001f826-icon.jpeg" />
+      <Resource Include="resources\eft\items\63626d904aa74b8fe30ab426-icon.jpeg" />
+      <Resource Include="resources\eft\items\636270263f2495c26f00b007-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c6463485cf0eeb260715-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c6c7dbfd5e4b95197e68-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c70ca33d8c4cdf4932c6-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c7750ef44505c87f5996-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c7f115805221fb410466-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c85357baa773a825b356-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c8c5dbfd5e4b95197e6b-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c8fb46b54c634724d847-icon.jpeg" />
+      <Resource Include="resources\eft\items\6389c92d52123d5dd17f8876-icon.jpeg" />
+      <Resource Include="resources\eft\items\63a0b208f444d32d6f03ea1e-icon.jpeg" />
+      <Resource Include="resources\eft\items\63a0b2eabea67a6d93009e52-icon.jpeg" />
+      <Resource Include="resources\eft\items\64897ffc3656831810043165-icon.jpeg" />
+      <Resource Include="resources\eft\items\648983d6b5a2df1c815a04ec-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489848173c462723909a14b-icon.jpeg" />
+      <Resource Include="resources\eft\items\648984b8d5b4df6140000a1a-icon.jpeg" />
+      <Resource Include="resources\eft\items\648984e3f09d032aa9399d53-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489851fc827d4637f01791b-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489854673c462723909a14e-icon.jpeg" />
+      <Resource Include="resources\eft\items\64898583d5b4df6140000a1d-icon.jpeg" />
+      <Resource Include="resources\eft\items\648985c074a806211e4fb682-icon.jpeg" />
+      <Resource Include="resources\eft\items\64898602f09d032aa9399d56-icon.jpeg" />
+      <Resource Include="resources\eft\items\648986bbc827d4637f01791e-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489870774a806211e4fb685-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489875745f9ca4ba51c4808-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489879db5a2df1c815a04ef-icon.jpeg" />
+      <Resource Include="resources\eft\items\648987d673c462723909a151-icon.jpeg" />
+      <Resource Include="resources\eft\items\64898838d5b4df6140000a20-icon.jpeg" />
+      <Resource Include="resources\eft\items\64898e9db18e646e992aba47-icon.jpeg" />
+      <Resource Include="resources\eft\items\648990314b4d2b31b63a46fc-icon.jpeg" />
+      <Resource Include="resources\eft\items\648996987063b903ff4b8561-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489981f7063b903ff4b8565-icon.jpeg" />
+      <Resource Include="resources\eft\items\64899a35fc093676bb0f57e3-icon.jpeg" />
+      <Resource Include="resources\eft\items\64899ec0a236de328b12db52-icon.jpeg" />
+      <Resource Include="resources\eft\items\64899f4189de40533661a0c0-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489a0a4fc493c59d15fec05-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489a233a236de328b12db56-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489a344fc493c59d15fec0f-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489a7d87063b903ff4b85cc-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489a97645f9ca4ba51c4dd0-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489aa584b6fc03d00374e59-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489ab9645f9ca4ba51c4dd7-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489b2b131a2135f0d7d0fcb-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489b73cebac5a4a1b73cab7-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489b88bcf0cd80b7e749069-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489b91dd0c36c0a4925c4b4-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489b99eebac5a4a1b73cabc-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489ba157c07471efa3e03b4-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489ba92a74e43447b64d5e2-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489bbd6d0c36c0a4925c4b8-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489bd7b79295b4f753d486a-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489bed4a53c8c047c3dc361-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489bfa844d98e01bc4c420e-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c03c8bc5233fdc78e788-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c0508bc5233fdc78e78c-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c0df7c07471efa3e03b8-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c0f731a2135f0d7d0fd5-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c12f8bc5233fdc78e790-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c164a53c8c047c3dc365-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c200cf0cd80b7e74906d-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c2aad0c36c0a4925c4bc-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c30331a2135f0d7d0fd9-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c46eebac5a4a1b73cac0-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c5cb44d98e01bc4c4212-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c65cd0c36c0a4925c4c0-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c753a74e43447b64d5e6-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c80e7c07471efa3e03bc-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c8a1a53c8c047c3dc369-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c8dba53c8c047c3dc36d-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489c99f7c07471efa3e03c0-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489ca66d0c36c0a4925c4c4-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489cad98bc5233fdc78e794-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489cb4fa74e43447b64d5ea-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489cc4379295b4f753d486e-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489cca131a2135f0d7d0fdd-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489d812cf0cd80b7e749071-icon.jpeg" />
+      <Resource Include="resources\eft\items\6489d89debac5a4a1b73caf7-icon.jpeg" />
+      <Resource Include="resources\eft\items\64ace9d9b5bf5e95f50a4c1d-icon.jpeg" />
+      <Resource Include="resources\eft\items\64ace9f9c4eda9354b0226aa-icon.jpeg" />
+      <Resource Include="resources\eft\items\64ace9ff03378853630da538-icon.jpeg" />
+      <Resource Include="resources\eft\items\64acea09c4eda9354b0226ad-icon.jpeg" />
+      <Resource Include="resources\eft\items\64acea0d03378853630da53b-icon.jpeg" />
+      <Resource Include="resources\eft\items\64acea16c4eda9354b0226b0-icon.jpeg" />
+      <Resource Include="resources\eft\items\64acea2c03378853630da53e-icon.jpeg" />
+      <Resource Include="resources\eft\items\64aceab0426a303417060654-icon.jpeg" />
+      <Resource Include="resources\eft\items\64aceac0c4eda9354b0226b3-icon.jpeg" />
+      <Resource Include="resources\eft\items\64aceaecc4eda9354b0226b6-icon.jpeg" />
+      <Resource Include="resources\eft\items\64aceafcb5bf5e95f50a4c20-icon.jpeg" />
+      <Resource Include="resources\eft\items\64acee6903378853630da544-icon.jpeg" />
+      <Resource Include="resources\eft\items\6530e8587cbfc1e309011e37-icon.jpeg" />
+      <Resource Include="resources\eft\items\6531119b9afebff7ff0a1769-icon.jpeg" />
     </ItemGroup>
-    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <ItemGroup>
+      <Resource Include="resources\icons\down-arrow.png" />
+      <Resource Include="resources\icons\upward-arrow.png" />
+    </ItemGroup>
+    <ItemGroup>
+      <Resource Include="resources\icons\wizard-hat.png" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
         <PropertyGroup>
             <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
         </PropertyGroup>
-        <Error Condition="!Exists('..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets'))"/>
-        <Error Condition="!Exists('..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets'))"/>
-        <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props'))"/>
-        <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets'))"/>
+        <Error Condition="!Exists('..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets'))" />
+        <Error Condition="!Exists('..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets'))" />
+        <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.props'))" />
+        <Error Condition="!Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets'))" />
+        <Error Condition="!Exists('..\packages\ILRepack.2.0.18\build\ILRepack.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.2.0.18\build\ILRepack.props'))" />
+        <Error Condition="!Exists('..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.props'))" />
+        <Error Condition="!Exists('..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.targets'))" />
     </Target>
     <Import Project="..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets" Condition="Exists('..\packages\System.Runtime.WindowsRuntime.4.6.0\build\net461\System.Runtime.WindowsRuntime.targets')"/>
     <Import Project="..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets" Condition="Exists('..\packages\System.Runtime.WindowsRuntime.UI.Xaml.4.6.0\build\net461\System.Runtime.WindowsRuntime.UI.Xaml.targets')"/>
     <Import Project="..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets" Condition="Exists('..\packages\Microsoft.Windows.SDK.Contracts.10.0.18362.2005\build\Microsoft.Windows.SDK.Contracts.targets')"/>
+    <Import Project="..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.targets" Condition="Exists('..\packages\ILRepack.FullAuto.1.2.0\build\ILRepack.FullAuto.targets')" />
 </Project>

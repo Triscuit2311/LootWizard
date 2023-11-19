@@ -5,7 +5,7 @@ namespace LootWizard;
 
 public class ItemsData
 {
-    public Dictionary<string, Item> ItemsDict = new();
+    public static Dictionary<string, Item> ItemsDict = new();
     public List<SearchEntry> SearchEntries = new();
     public ObservableCollection<DisplayItem> SearchResults = new();
     public Dictionary<string, Item> SelectedItems = new();

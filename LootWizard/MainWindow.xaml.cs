@@ -22,11 +22,34 @@ public partial class MainWindow
         InitializeComponent();
 
         PriceFilterType.SelectedIndex = 0;
-        SearchBox.Text = "";
-        // Bind the source
+        ItemsSearchBox.Text = "";
+        
+        
+        // Bind the sources
         ItemsList.ItemsSource = itemsData.SearchResults;
+        
+        QuestsListPrapor.ItemsSource = questsData.PraporQuests;
+        QuestsListTherapist.ItemsSource = questsData.TherapistQuests;
+        QuestsListSkier.ItemsSource = questsData.SkierQuests;
+        QuestsListFence.ItemsSource = questsData.FenceQuests;
+        QuestsListPeacekeeper.ItemsSource = questsData.PeacekeeperQuests;
+        QuestsListMechanic.ItemsSource = questsData.MechanicQuests;
+        QuestsListRagman.ItemsSource = questsData.RagmanQuests;
+        QuestsListJaeger.ItemsSource = questsData.JaegerQuests;
+        
+        QuestsListLightkeeper.ItemsSource = questsData.LightkeeperQuests;
+        
+        
+        
+        PersistentItemManager.ItemChanged += OnPersistentItemChanged;
+
         Loaded += MainWindow_Loaded;
         Closed += MainWindow_Closed;
+    }
+
+    private void OnPersistentItemChanged(object sender, ItemChangedEventArgs e)
+    {
+        ApplyFilters(sender, new RoutedEventArgs());
     }
 
 
@@ -47,11 +70,12 @@ public partial class MainWindow
     private void MainWindow_Closed(object sender, EventArgs e)
     {
         PersistentItemManager.Save();
+        PersistentQuestManager.Save();
     }
 
-    private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+    private void ItemsSearchBox_TextChanged(object sender, TextChangedEventArgs e)
     {
-        var searchTerm = SearchBox.Text;
+        var searchTerm = ItemsSearchBox.Text;
         SearchItems(searchTerm, LootFilters.ActiveFilters);
     }
 
@@ -61,7 +85,7 @@ public partial class MainWindow
         var query = searchTerm.ToLower();
         foreach (var entry in itemsData.SearchEntries)
         {
-            var item = itemsData.ItemsDict[entry.id];
+            var item = ItemsData.ItemsDict[entry.id];
 
             var flag = filters.All(filter => filter.MeetsCriteria(item));
 
@@ -84,7 +108,7 @@ public partial class MainWindow
         Console.WriteLine("Failed to load image: " + e.ErrorException.Message);
     }
 
-    private void ApplyFilters(object sender, RoutedEventArgs e)
+    public void ApplyFilters(object sender, RoutedEventArgs e)
     {
         LootFilters.ActiveFilters.Clear();
 
@@ -103,16 +127,8 @@ public partial class MainWindow
         // Selected filter
         if (SelectedFilterCheckBox.IsChecked == true) LootFilters.ActiveFilters.Add(LootFilters.FilterBySelected);
 
-        var searchTerm = SearchBox.Text;
+        var searchTerm = ItemsSearchBox.Text;
         SearchItems(searchTerm, LootFilters.ActiveFilters);
-
-        // Apply filters to your items data and update the UI accordingly
-    }
-
-
-    private void GenerateButton_Click(object sender, RoutedEventArgs e)
-    {
-        LootConfigManager.Compile(itemsData, questsData);
     }
 
     private void ToggleButton_OnChecked(object sender, RoutedEventArgs e)
@@ -120,6 +136,8 @@ public partial class MainWindow
         if (sender is not ToggleButton toggleButton) return;
         var displayItem = toggleButton.DataContext as DisplayItem? ?? default;
         itemsData.SelectedItems[displayItem.item.id] = displayItem.item;
+        LootConfigManager.Compile(itemsData, questsData);
+        PersistentItemManager.SetSelected(displayItem.item.id, true);
     }
 
     private void ToggleButton_OnUnchecked(object sender, RoutedEventArgs e)
@@ -127,5 +145,61 @@ public partial class MainWindow
         if (sender is not ToggleButton toggleButton) return;
         var displayItem = toggleButton.DataContext as DisplayItem? ?? default;
         itemsData.SelectedItems.Remove(displayItem.item.id);
+        LootConfigManager.Compile(itemsData, questsData);
+        PersistentItemManager.SetSelected(displayItem.item.id, false);
+    }
+
+    
+
+    private void QuestItemInc_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button but) return;
+        var displayItem = but.DataContext as QuestItem?? default;
+
+        var item = ItemsData.ItemsDict[displayItem.Id];
+
+        displayItem.QuantityFound++;
+        
+        foreach (var qid in item.quest_ids)
+        {
+            if (!PersistentQuestManager.Has(qid)) continue;
+            PersistentQuestManager.UpdateItemCount(qid,item.id, displayItem.QuantityFound);
+        }
+        
+    }
+
+    private void QuestItemDec_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is not Button but) return;
+        var displayItem = but.DataContext as QuestItem?? default;
+
+        var item = ItemsData.ItemsDict[displayItem.Id];
+
+        displayItem.QuantityFound = displayItem.QuantityFound <= 1 ? 0 : displayItem.QuantityFound - 1;
+        
+        
+        foreach (var qid in item.quest_ids)
+        {
+            if (!PersistentQuestManager.Has(qid)) continue;
+            PersistentQuestManager.UpdateItemCount(qid,item.id, displayItem.QuantityFound);
+        }
+    }
+
+    private void QuestItemToggle_OnChecked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ToggleButton toggleButton) return;
+        var item = toggleButton.DataContext as QuestItem?? default;
+        itemsData.SelectedItems[item.Id] = ItemsData.ItemsDict[item.Id];
+        PersistentItemManager.SetSelected(item.Id, true);
+        LootConfigManager.Compile(itemsData, questsData);
+    }
+
+    private void QuestItemToggle_OnUnchecked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not ToggleButton toggleButton) return;
+        var item = toggleButton.DataContext as QuestItem?? default;
+        itemsData.SelectedItems.Remove(item.Id);
+        PersistentItemManager.SetSelected(item.Id, false);
+        LootConfigManager.Compile(itemsData, questsData);
     }
 }

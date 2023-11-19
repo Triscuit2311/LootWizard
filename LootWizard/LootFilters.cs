@@ -21,6 +21,12 @@ public static class LootFilters
         if (price <= 0) return new LootFilter(item => true);
         return new LootFilter(item => item.avg_price / (item.slots > 0 ? item.slots : 1) >= price);
     }
+
+    // public static LootFilter FilerByItemType(string item_type)
+    // {
+    //     if(item_type.Length < 1) return new LootFilter(item => true);
+    //     return new LootFilter(item => item.item_types.Contains(item_type.ToLower()));
+    // }
 }
 
 public class LootFilter
