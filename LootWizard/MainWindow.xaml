@@ -151,7 +151,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <!-- Image -->
-                                    <Image Grid.Column="0" Source="{Binding item.img_path}" Width="50" Height="50"
+                                    <Image Grid.Column="0" 
+                                           Source="{Binding img_res}" Width="50" Height="50"
                                            Stretch="Uniform"
                                            ImageFailed="Image_OnFailed" RenderOptions.BitmapScalingMode="HighQuality" />
 
@@ -172,7 +173,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="ToggleButton">
                                                             <Image x:Name="imgFavorite"
-                                                                   Source="{Binding StarInactivePath}"
+                                                                   Source="resources/icons/star_inactive.png"
                                                                    RenderOptions.BitmapScalingMode="HighQuality">
                                                                 <Image.Effect>
                                                                     <DropShadowEffect x:Name="imgShadowEffect"
@@ -183,7 +184,7 @@
                                                                 <DataTrigger Binding="{Binding itemData.favorite}"
                                                                              Value="True">
                                                                     <Setter TargetName="imgFavorite" Property="Source"
-                                                                            Value="{Binding StarActivePath}" />
+                                                                            Value="resources/icons/star_active.png" />
                                                                 </DataTrigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
@@ -192,7 +193,6 @@
                                             </Style>
                                         </ToggleButton.Style>
                                     </ToggleButton>
-
 
                                     <ToggleButton Grid.Column="3" IsChecked="{Binding itemData.selected}"
                                                   Margin="10,0,0,0" Width="24" Height="24" BorderThickness="0"
@@ -204,7 +204,7 @@
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="ToggleButton">
                                                             <Image x:Name="imgChecked"
-                                                                   Source="{Binding CheckActivePath}"
+                                                                   Source="resources/icons/check_active.png"
                                                                    RenderOptions.BitmapScalingMode="HighQuality">
                                                                 <Image.Effect>
                                                                     <DropShadowEffect x:Name="imgShadowEffect"
@@ -215,7 +215,7 @@
                                                                 <DataTrigger Binding="{Binding itemData.selected}"
                                                                              Value="True">
                                                                     <Setter TargetName="imgChecked" Property="Source"
-                                                                            Value="{Binding CheckInactivePath}" />
+                                                                            Value="resources/icons/check_inactive.png"/>
                                                                 </DataTrigger>
                                                             </ControlTemplate.Triggers>
                                                         </ControlTemplate>
@@ -236,12 +236,14 @@
                 </Grid>
             </TabItem>
 
-
+            
             <!-- Quests Tab -->
             <TabItem Header="Quests">
                 <!-- Content for Quests Tab -->
             </TabItem>
 
+            
+            
             <!-- Settings Tab -->
             <TabItem Header="Settings">
                 <!-- Content for Settings Tab -->

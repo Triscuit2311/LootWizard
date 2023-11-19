@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using ImageMagick;
 
 namespace LootWizard;
 
@@ -106,22 +105,32 @@ public class CacheManager : IDisposable
 
         questsData.QuestList = new List<Quest>(quests);
 
+
+
+        foreach (var quest in quests)
+        {
+            // add persistant data if needed
+            PersistentQuestManager.AddDoNotUpdate(quest.id,
+                new PersistentQuestData(quest.id, false, new Dictionary<string, int>()));
+        }
+
         Console.WriteLine("Populating Item Objects");
         var items = CreateItemsFromJson(itemsJson);
 
         PersistentItemManager.LoadUpdate();
+        PersistentQuestManager.LoadUpdate();
 
         Console.WriteLine("Checking Image Cache..");
-        var missing_imgs = 0;
+        //var missing_imgs = 0;
 
-        var default_color = Colors.Aqua;
+        var defaultColor = Colors.Aqua;
 
 
         foreach (var item in items)
         {
             // add persistant data if needed
             PersistentItemManager.AddDoNotUpdate(item.id,
-                new PersistentItemData(item.id, default_color, false));
+                new PersistentItemData(item.id, defaultColor, false));
             if (PersistentItemManager.Get(item.id).selected) itemsData.SelectedItems[item.id] = item;
 
             // Updating items dict
@@ -135,52 +144,10 @@ public class CacheManager : IDisposable
                 item.searchable_short,
                 item.searchable_full,
                 item.id));
-
-            if (!CheckImageCache(item)) missing_imgs++;
+            
         }
 
-        Console.WriteLine($"Missing images: {missing_imgs}/{items.Count}");
-
-        if (missing_imgs > 0)
-        {
-            Console.WriteLine("Downloading missing images, this could take a few minutes.");
-            using (var httpClient = new HttpClient())
-            {
-                foreach (var item in items) await CacheItemImage(httpClient, item);
-            }
-
-            Console.WriteLine("Images cached.");
-        }
     }
-
-    private static async Task CacheItemImage(HttpClient httpClient, Item item)
-    {
-        var imgDirectory = "img";
-        var imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
-
-        if (!File.Exists(imgPath))
-        {
-            if (!Directory.Exists(imgDirectory)) Directory.CreateDirectory(imgDirectory);
-
-            var imageData = await httpClient.GetByteArrayAsync(item.icon_link);
-
-            // Convert WebP to JPEG
-            using (var webpImage = new MagickImage(imageData))
-            {
-                webpImage.Format = MagickFormat.Jpeg;
-                webpImage.Write(imgPath); // This saves the image in JPEG format
-            }
-        }
-    }
-
-    private static bool CheckImageCache(Item item)
-    {
-        var imgDirectory = "img";
-        var imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
-
-        return File.Exists(imgPath);
-    }
-
 
     public static List<Quest> CreateTasksFromJson(string json)
     {

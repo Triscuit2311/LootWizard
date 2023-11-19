@@ -5,11 +5,35 @@ namespace LootWizard;
 
 public record struct Quest
 {
-    public string id;
+    public string id { get; set; }
     public string name;
     public List<RequiredItem> require_items;
     public string searchable_name;
     public string trader_name;
+
+    public string Name
+    {
+        get => name;
+        set => name = value;
+    }
+
+    public List<RequiredItem> RequireItems
+    {
+        get => require_items;
+        set => require_items = value;
+    }
+
+    public string SearchableName
+    {
+        get => searchable_name;
+        set => searchable_name = value;
+    }
+
+    public string TraderName
+    {
+        get => trader_name;
+        set => trader_name = value;
+    }
 
     public Quest(JsonElement taskElement)
     {
@@ -31,6 +55,19 @@ public record struct Quest
     public struct RequiredItem
     {
         public string id;
+
+        public string Id
+        {
+            get => id;
+            set => id = value;
+        }
+
+        public int Count
+        {
+            get => count;
+            set => count = value;
+        }
+
         public int count;
 
         public RequiredItem(string id, int count)
@@ -40,65 +77,3 @@ public record struct Quest
         }
     }
 }
-
-//
-// {
-// "data": {
-//     "tasks": [
-//     {
-//         "id": "5936d90786f7742b1420ba5b",
-//         "name": "Debut",
-//         "trader": {
-//             "name": "Prapor"
-//         },
-//         "objectives": [
-//         {
-//             "type": "shoot"
-//         },
-//         {
-//             "type": "giveItem",
-//             "item": {
-//                 "id": "54491c4f4bdc2db1078b4568"
-//             },
-//             "count": 2
-//         }
-//         ]
-//     },
-//     {
-//         "id": "5967733e86f774602332fc84",
-//         "name": "Shortage",
-//         "trader": {
-//             "name": "Therapist"
-//         },
-//         "objectives": [
-//         {
-//             "type": "findItem",
-//             "item": {
-//                 "id": "544fb45d4bdc2dee738b4568"
-//             },
-//             "count": 3
-//         },
-//         {
-//             "type": "giveItem",
-//             "item": {
-//                 "id": "544fb45d4bdc2dee738b4568"
-//             },
-//             "count": 3
-//         }
-//         ]
-//     },
-//     {
-//         "id": "5ac23c6186f7741247042bad",
-//         "name": "Gunsmith - Part 1",
-//         "trader": {
-//             "name": "Mechanic"
-//         },
-//         "objectives": [
-//         {
-//             "type": "buildWeapon"
-//         }
-//         ]
-//     }
-//     ]
-//     }
-// }

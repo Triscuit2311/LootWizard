@@ -1,12 +1,7 @@
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.Native-Q8-arm64.dll
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.Native-Q8-x64.dll
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.Native-Q8-x86.dll
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\LootWizard.exe.config
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\LootWizard.exe
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\LootWizard.pdb
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\FuzzySharp.dll
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET-Q8-AnyCPU.dll
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET.Core.dll
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Newtonsoft.Json.Bson.dll
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Newtonsoft.Json.dll
@@ -19,8 +14,6 @@ C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\System.Text.Encodings.
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\System.Text.Json.dll
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\System.ValueTuple.dll
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET-Q8-AnyCPU.xml
-C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Magick.NET.Core.xml
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Newtonsoft.Json.xml
 C:\Users\dt\RiderProjects\LootWizard\LootWizard\bin\Debug\Newtonsoft.Json.Bson.pdb
