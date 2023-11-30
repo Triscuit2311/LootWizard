@@ -10,7 +10,7 @@ It allows you to favorite items, track items needed for quests, and manage your 
 - **Quest Tracking:** Simple up/down buttons for tracking quest items.
 - **Automatic Updates:** The loot list updates automatically when you select an item.
 - **Initial API Data Fetching:** First run fetches data from the API (a few seconds delay).
-- **Settings Tab:** To be developed with future configuration options.
+- **Settings Tab:** Currently lets you change the output path of the generated file, persistant.
 - **Quest Display:** Only quests with turn-in item requirements are displayed.
 
 ### Upcoming Features
@@ -31,7 +31,6 @@ LootWizard uses the open-source Tarkov API (Tarkov.dev) for item and quest data,
 ### Important Notes
 - LootWizard does **NOT** read/write game memory.
 - The quest tracking feature is for convenience and does not impact the loot list (selecting items from here still does).
-- The settings tab is currently empty, awaiting future updates.
 - The application might take a few seconds on first run to populate data from the API.
 - This is an early version; expect some bugs and limitations.
 
