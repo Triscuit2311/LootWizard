@@ -1489,7 +1489,19 @@
 
             <!-- Settings Tab -->
             <TabItem Header="Settings">
-                <!-- Content for Settings Tab -->
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Change Output Path:" Grid.Row="0" Margin="5"/>
+                    <TextBox x:Name="txtOutputPath" Grid.Row="1" Margin="5"/>
+                    <Button Content="Change Path" Grid.Row="2" Margin="5" Click="ChangePathButton_Click"/>
+                    <TextBlock x:Name="txtFeedback" Grid.Row="3" Margin="5" Foreground="Red"/>
+                </Grid>
             </TabItem>
 
         </TabControl>

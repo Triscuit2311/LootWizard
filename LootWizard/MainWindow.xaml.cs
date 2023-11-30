@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 using FuzzySharp;
 
 namespace LootWizard;
@@ -201,5 +203,28 @@ public partial class MainWindow
         itemsData.SelectedItems.Remove(item.Id);
         PersistentItemManager.SetSelected(item.Id, false);
         LootConfigManager.Compile(itemsData, questsData);
+    }
+
+    private void ChangePathButton_Click(object sender, RoutedEventArgs e)
+    {
+        string newPath = txtOutputPath.Text;
+    
+        if (LootConfigManager.IsValidPath(newPath))
+        {
+            if (Directory.Exists(newPath) || LootConfigManager.TryCreateDirectory(newPath))
+            {
+                LootConfigManager.ChangeOutputPath(newPath);
+                txtFeedback.Text = "Path changed successfully.";
+                txtFeedback.Foreground = new SolidColorBrush(Colors.Green);
+            }
+            else
+            {
+                txtFeedback.Text = "Directory does not exist and could not be created.";
+            }
+        }
+        else
+        {
+            txtFeedback.Text = "Invalid path entered. Please enter a valid path.";
+        }
     }
 }
