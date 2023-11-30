@@ -22,10 +22,10 @@ LootWizard uses the open-source Tarkov API (Tarkov.dev) for item and quest data,
 ## Installation & Usage
 
 ```markdown
-1. **Run:** Execute `LootWizard.exe`. The first start will populate data from the API.
-2. **Use:** Select and favorite items, with easy access for future reference.
-3. **Integration:** Use the generated `loot_generated.ini` file for your applications.
-4. **Profit!**
+1. Run: Execute `LootWizard.exe`. The first start will populate data from the API.
+2. Use: Select and favorite items, with easy access for future reference.
+3. Integration: Use the generated `loot_generated.ini` file for your applications.
+4. Profit!
 ```
 
 ### Important Notes
