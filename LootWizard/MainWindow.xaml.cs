@@ -227,4 +227,36 @@ public partial class MainWindow
             txtFeedback.Text = "Invalid path entered. Please enter a valid path.";
         }
     }
+
+    private bool _use_dark_mode = false;
+    private void DarkModeToggle_Click(object sender, RoutedEventArgs e)
+    {
+        Console.WriteLine("In DarkModeToggle");
+        var dict = new ResourceDictionary();
+
+        if (!_use_dark_mode)
+        {
+            Console.WriteLine("Setting Dark Mode");
+
+            dict.Source = new Uri("pack://application:,,,/LootWizard;component/DarkTheme.xaml");
+        }
+        else
+        {
+            Console.WriteLine("Setting Light Mode");
+
+            dict.Source = new Uri("pack://application:,,,/LootWizard;component/LightTheme.xaml");
+        }
+        
+        Console.WriteLine("Setting theme");
+
+        Application.Current.Resources.MergedDictionaries.Clear();
+        Application.Current.Resources.MergedDictionaries.Add(dict);
+        Console.WriteLine("Done");
+
+        
+        _use_dark_mode = !_use_dark_mode;
+    }
+
+    
+    
 }

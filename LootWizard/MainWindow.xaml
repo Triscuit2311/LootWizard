@@ -6,27 +6,28 @@
         xmlns:local="clr-namespace:LootWizard"
         mc:Ignorable="d"
         Title="Loot Wizard" Height="640" Width="720" Icon="resources/icons/wizard-hat.png"
-        >
+        Background="{DynamicResource BackgroundColor}"
+        Foreground="{DynamicResource ForegroundColor}">
 
     <Window.Resources>
         <Style x:Key="FlatButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Background" Value="{DynamicResource BackgroundColor}" />
             <Setter Property="BorderBrush" Value="Transparent" />
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Opacity" Value="0.8" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="{TemplateBinding Background}"
+                        <Border Background="{DynamicResource BackgroundColor}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Opacity="{TemplateBinding Opacity}">
                             <ContentPresenter HorizontalAlignment="Center"
                                               VerticalAlignment="Center">
-                                <ContentPresenter.Effect>
-                                    <DropShadowEffect x:Name="imgShadowEffect"
-                                                      Color="Transparent" BlurRadius="0" />
-                                </ContentPresenter.Effect>
+                                <!-- <ContentPresenter.Effect> -->
+                                <!--     <DropShadowEffect x:Name="imgShadowEffect" -->
+                                <!--                       Color="Transparent" BlurRadius="0" /> -->
+                                <!-- </ContentPresenter.Effect> -->
                             </ContentPresenter>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -42,7 +43,7 @@
     </Window.Resources>
 
     <Grid>
-        <TabControl TabStripPlacement="Left">
+        <TabControl TabStripPlacement="Left" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
             <!-- TabControl Style -->
             <TabControl.Resources>
                 <Style TargetType="TabItem">
@@ -50,7 +51,7 @@
                         <Setter.Value>
                             <ControlTemplate TargetType="TabItem">
                                 <Grid>
-                                    <Border x:Name="TabItemBorder" Background="White" Margin="0,5,0,5">
+                                    <Border x:Name="TabItemBorder" Background="{DynamicResource BackgroundColor}" Margin="0,5,0,5">
                                         <ContentPresenter x:Name="ContentSite"
                                                           VerticalAlignment="Center"
                                                           HorizontalAlignment="Center"
@@ -60,10 +61,10 @@
                                 </Grid>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter TargetName="TabItemBorder" Property="Background" Value="DarkGray" />
+                                        <Setter TargetName="TabItemBorder" Property="Background" Value="Firebrick" />
                                     </Trigger>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="TabItemBorder" Property="Background" Value="Khaki" />
+                                        <Setter TargetName="TabItemBorder" Property="Background" Value="DarkGreen" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -74,7 +75,7 @@
 
 
             <!-- Items Tab -->
-            <TabItem Header="Items">
+            <TabItem Header="Items" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" /> <!-- For Search Area -->
@@ -99,11 +100,12 @@
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="0" Grid.Row="0" x:Name="ItemsSearchBoxLabel" Content="Search: "
-                                   VerticalAlignment="Center" />
+                                   VerticalAlignment="Center" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
                             <TextBox Grid.Column="1" Grid.Row="0" x:Name="ItemsSearchBox" HorizontalAlignment="Stretch"
                                      VerticalAlignment="Center"
                                      Margin="10,10,10,0"
-                                     TextChanged="ItemsSearchBox_TextChanged" />
+                                     TextChanged="ItemsSearchBox_TextChanged" 
+                                     Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
                         </Grid>
 
                         <!-- Filters and Search Button Below -->
@@ -130,9 +132,11 @@
 
                                 <!-- Price/Price-per-slot Filter -->
                                 <TextBox Grid.Column="0" x:Name="PriceFilterBox" Grid.Row="0" Margin="5,5,5,0"
-                                         TextChanged="ApplyFilters" />
+                                         TextChanged="ApplyFilters" 
+                                         Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
                                 <ComboBox Grid.Column="0" x:Name="PriceFilterType" Grid.Row="1" Margin="5,5,5,0"
-                                          SelectionChanged="ApplyFilters">
+                                          SelectionChanged="ApplyFilters"
+                                          >
                                     <ComboBoxItem Content="Filter by Price" />
                                     <ComboBoxItem Content="Filter by Price/Slot" />
                                 </ComboBox>
@@ -141,17 +145,23 @@
                                 <CheckBox Grid.Column="1" x:Name="FavoritesFilterCheckBox"
                                           Content="Filter by Favorites"
                                           Grid.Row="0"
-                                          Margin="5,5,5,0" Click="ApplyFilters" />
+                                          Margin="5,5,5,0" Click="ApplyFilters" 
+                                          Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
                                 <CheckBox Grid.Column="1" x:Name="SelectedFilterCheckBox" Content="Filter by Selected"
                                           Grid.Row="1"
-                                          Margin="5,5,5,0" Click="ApplyFilters" />
+                                          Margin="5,5,5,0" Click="ApplyFilters" 
+                                          Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
                             </Grid>
 
                         </Grid>
                     </Grid>
 
                     <!-- List of Items -->
-                    <ListView Grid.Row="1" x:Name="ItemsList" Margin="10,5,10,10" HorizontalContentAlignment="Stretch">
+                    <ListView Grid.Row="1" x:Name="ItemsList" Margin="10,5,10,10" 
+                              HorizontalContentAlignment="Stretch" 
+                              Background="{DynamicResource BackgroundColor}" 
+                              Foreground="{DynamicResource ForegroundColor}"
+                              >
                         <ListView.ItemContainerStyle>
                             <Style TargetType="ListViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -192,10 +202,9 @@
                                                             <Image x:Name="imgFavorite"
                                                                    Source="resources/icons/star_inactive.png"
                                                                    RenderOptions.BitmapScalingMode="HighQuality">
-                                                                <Image.Effect>
-                                                                    <DropShadowEffect x:Name="imgShadowEffect"
-                                                                        Color="Transparent" BlurRadius="0" />
-                                                                </Image.Effect>
+                                                                <!-- <Image.Effect> -->
+                                                                <!--     <DropShadowEffect x:Name="imgShadowEffect" Color="Transparent" BlurRadius="0" /> -->
+                                                                <!-- </Image.Effect> -->
                                                             </Image>
                                                             <ControlTemplate.Triggers>
                                                                 <DataTrigger Binding="{Binding itemData.favorite}"
@@ -224,10 +233,10 @@
                                                             <Image x:Name="imgChecked"
                                                                    Source="resources/icons/check_active.png"
                                                                    RenderOptions.BitmapScalingMode="HighQuality">
-                                                                <Image.Effect>
-                                                                    <DropShadowEffect x:Name="imgShadowEffect"
-                                                                        Color="Transparent" BlurRadius="0" />
-                                                                </Image.Effect>
+                                                                <!-- <Image.Effect> -->
+                                                                <!--     <DropShadowEffect x:Name="imgShadowEffect" -->
+                                                                <!--         Color="Transparent" BlurRadius="0" /> -->
+                                                                <!-- </Image.Effect> -->
                                                             </Image>
                                                             <ControlTemplate.Triggers>
                                                                 <DataTrigger Binding="{Binding itemData.selected}"
@@ -254,7 +263,7 @@
 
 
             <!-- Quests Tab -->
-            <TabItem Header="Quests">
+            <TabItem Header="Quests" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
 
                 <!-- Content for Quests Tab -->
                 <Grid>
@@ -278,14 +287,15 @@
                                 <Image Source="resources/eft/traders/Prapor.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListPrapor" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                                     </Style>
                                 </ListView.ItemContainerStyle>
-                                <ListView.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type local:DisplayQuest}">
+                                <ListView.ItemTemplate >
+                                    <DataTemplate DataType="{x:Type local:DisplayQuest}" >
                                         <Grid Margin="5">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"></RowDefinition>
@@ -297,13 +307,14 @@
                                                 <ColumnDefinition Width="15" />
                                             </Grid.ColumnDefinitions>
 
-                                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
+                                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0" >
                                                 <TextBlock FontWeight="Bold" Text="{Binding questName}" />
                                             </StackPanel>
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -372,12 +383,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -413,7 +424,7 @@
                                 <Image Source="resources/eft/traders/Therapist.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListTherapist" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -438,7 +449,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -507,12 +519,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -547,7 +559,7 @@
                                 <Image Source="resources/eft/traders/Skier.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListSkier" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -572,7 +584,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -641,12 +654,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -681,7 +694,8 @@
                                 <Image Source="resources/eft/traders/Fence.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListFence" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -706,7 +720,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -775,12 +790,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -815,7 +830,8 @@
                                 <Image Source="resources/eft/traders/Peacekeeper.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListPeacekeeper" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -840,7 +856,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -909,12 +926,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -949,7 +966,8 @@
                                 <Image Source="resources/eft/traders/Mechanic.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListMechanic" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -974,7 +992,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -1043,12 +1062,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -1083,7 +1102,8 @@
                                 <Image Source="resources/eft/traders/Ragman.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListRagman" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -1108,7 +1128,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -1177,12 +1198,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -1217,7 +1238,8 @@
                                 <Image Source="resources/eft/traders/Jaeger.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListJaeger" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -1242,7 +1264,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -1311,12 +1334,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -1351,7 +1374,8 @@
                                 <Image Source="resources/eft/traders/Lightkeeper.png" Width="36" Height="36"></Image>
                             </TabItem.Header>
                             <ListView Grid.Row="1" x:Name="QuestsListLightkeeper" Margin="10,5,10,10"
-                                      HorizontalContentAlignment="Stretch">
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                 <ListView.ItemContainerStyle>
                                     <Style TargetType="ListViewItem">
                                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -1376,7 +1400,8 @@
 
 
                                             <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
-                                                      HorizontalContentAlignment="Stretch">
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                                                 <ListView.ItemTemplate>
                                                     <DataTemplate>
                                                         <Grid HorizontalAlignment="Stretch">
@@ -1445,12 +1470,12 @@
                                                                                         <Image x:Name="imgChecked"
                                                                                             Source="resources/icons/check_active.png"
                                                                                             RenderOptions.BitmapScalingMode="HighQuality">
-                                                                                            <Image.Effect>
-                                                                                                <DropShadowEffect
-                                                                                                    x:Name="imgShadowEffect"
-                                                                                                    Color="Transparent"
-                                                                                                    BlurRadius="0" />
-                                                                                            </Image.Effect>
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
                                                                                         </Image>
                                                                                         <ControlTemplate.Triggers>
                                                                                             <DataTrigger
@@ -1488,19 +1513,23 @@
 
 
             <!-- Settings Tab -->
-            <TabItem Header="Settings">
+            <TabItem Header="Settings" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
                 <Grid Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-
+                    
+                    <Button Content="Toggle Dark Mode" Grid.Row="4" MaxHeight="20" Margin="5" Click="DarkModeToggle_Click" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
                     <TextBlock Text="Change Output Path:" Grid.Row="0" Margin="5"/>
-                    <TextBox x:Name="txtOutputPath" Grid.Row="1" Margin="5"/>
-                    <Button Content="Change Path" Grid.Row="2" Margin="5" Click="ChangePathButton_Click"/>
-                    <TextBlock x:Name="txtFeedback" Grid.Row="3" Margin="5" Foreground="Red"/>
+                    <TextBox x:Name="txtOutputPath" Grid.Row="1" Margin="5" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
+                    <Button Content="Change Path" Grid.Row="2" Margin="5" Click="ChangePathButton_Click" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}"/>
+                    <TextBlock x:Name="txtFeedback" Grid.Row="3" Margin="5"  Foreground="Red" Background="{DynamicResource BackgroundColor}" />
+
                 </Grid>
             </TabItem>
 

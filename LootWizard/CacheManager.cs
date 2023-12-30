@@ -6,34 +6,36 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using ImageMagick;
+
 //using ImageMagick;
 namespace LootWizard;
 
 public class CacheManager : IDisposable
 {
     
-    // private static async Task CacheItemImage(HttpClient httpClient, Item item)
-    // {
-    //     string imgDirectory = "img";
-    //     string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
-    //
-    //     if (!File.Exists(imgPath))
-    //     {
-    //         if (!Directory.Exists(imgDirectory))
-    //         {
-    //             Directory.CreateDirectory(imgDirectory);
-    //         }
-    //
-    //         byte[] imageData = await httpClient.GetByteArrayAsync(item.icon_link);
-    //
-    //         // Convert WebP to JPEG
-    //         using (var webpImage = new MagickImage(imageData))
-    //         {
-    //             webpImage.Format = MagickFormat.Jpeg;
-    //             webpImage.Write(imgPath); // This saves the image in JPEG format
-    //         }
-    //     }
-    // }
+    private static async Task CacheItemImage(HttpClient httpClient, Item item)
+    {
+        string imgDirectory = "img";
+        string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
+    
+        if (!File.Exists(imgPath))
+        {
+            if (!Directory.Exists(imgDirectory))
+            {
+                Directory.CreateDirectory(imgDirectory);
+            }
+    
+            byte[] imageData = await httpClient.GetByteArrayAsync(item.icon_link);
+    
+            // Convert WebP to JPEG
+            using (var webpImage = new MagickImage(imageData))
+            {
+                webpImage.Format = MagickFormat.Jpeg;
+                webpImage.Write(imgPath); // This saves the image in JPEG format
+            }
+        }
+    }
     //
     
     private const string ItemsCacheFile = "items_cache.json";
@@ -153,14 +155,14 @@ public class CacheManager : IDisposable
         }
 
         
-        // Console.WriteLine("STARTING IMAGE CACHE");
-        // using (var httpClient = new HttpClient())
-        // {
-        //     foreach (var item in items)
-        //     {
-        //         await CacheItemImage(httpClient, item);
-        //     }
-        // }
+      //  Console.WriteLine("STARTING IMAGE CACHE");
+     //   using (var httpClient = new HttpClient())
+      //  //{
+      //      foreach (var item in items)
+      //      {
+      //          await CacheItemImage(httpClient, item);
+     //       }
+     //   }
         
 
 
