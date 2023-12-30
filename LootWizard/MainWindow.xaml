@@ -7,7 +7,8 @@
         mc:Ignorable="d"
         Title="Loot Wizard" Height="640" Width="720" Icon="resources/icons/wizard-hat.png"
         Background="{DynamicResource BackgroundColor}"
-        Foreground="{DynamicResource ForegroundColor}">
+        Foreground="{DynamicResource ForegroundColor}"
+        WindowStyle="ThreeDBorderWindow">
 
     <Window.Resources>
         <Style x:Key="FlatButtonStyle" TargetType="Button">
@@ -43,6 +44,8 @@
     </Window.Resources>
 
     <Grid>
+        
+        
         <TabControl TabStripPlacement="Left" Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
             <!-- TabControl Style -->
             <TabControl.Resources>
