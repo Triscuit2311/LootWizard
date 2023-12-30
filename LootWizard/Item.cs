@@ -41,6 +41,12 @@ public record struct Item
         quest_ids = GetJsonProperty(e => e.GetProperty("usedInTasks").EnumerateArray().Select(task => task.GetProperty("id").GetString()).ToList(), new List<string>());
 
         img_path = FileHelpers.ResolveImagePath($"img\\{id}-icon.jpeg");
+        if (name.Contains("titan"))
+        {
+            Console.WriteLine(name);
+            Console.WriteLine(id);
+            Console.WriteLine(img_path);
+        }
     }
 
     public string id { get; set; }
