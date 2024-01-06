@@ -12,6 +12,7 @@ It allows you to favorite items, track items needed for quests, and manage your 
 - **Initial API Data Fetching:** First run fetches data from the API (a few seconds delay).
 - **Settings Tab:** Currently lets you change the output path of the generated file, persistant.
 - **Quest Display:** Only quests with turn-in item requirements are displayed.
+- **Dark Mode:** Finally!
 
 ### Upcoming Features
 - **Filter by Item Type:** Ammo, backpacks, meds, etc. (in progress).
