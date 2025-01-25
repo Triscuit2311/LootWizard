@@ -13,14 +13,24 @@ public static class LootFilters
     public static LootFilter FilterByPrice(int price)
     {
         if (price <= 0) return new LootFilter(item => true);
+
         return new LootFilter(item => item.avg_price >= price);
     }
 
     public static LootFilter FilterByPricePerSlot(int price)
     {
         if (price <= 0) return new LootFilter(item => true);
+
+
+
+
         return new LootFilter(item => item.avg_price / (item.slots > 0 ? item.slots : 1) >= price);
     }
+
+
+    
+
+
 
     // public static LootFilter FilerByItemType(string item_type)
     // {

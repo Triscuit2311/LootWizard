@@ -92,14 +92,27 @@ public class LootConfigManager
         }
 
         var sb = new StringBuilder();
+        sb.Append("{\n");
+        int i = 0;
         foreach (var kvp in itemsData.SelectedItems) 
         {
-            sb.Append($"{kvp.Value.id} # {kvp.Value.short_name}\n");
+            /*  "5780cf7f2459777de4559322": "Mark.Key",*/
+            sb.Append($"\"{kvp.Value.id}\": \"{kvp.Value.short_name}\"");
+            if (i < itemsData.SelectedItems.Count - 1) {
+                sb.Append(",\n");
+            }
+            else
+            {
+                sb.Append("\n");
+            }
+            ++i;
         }
+        sb.Append("}\n");
+
 
         try
         {
-            File.WriteAllText(output_path + "/loot_generated.ini", sb.ToString());
+            File.WriteAllText(output_path + "/loot_generated.json", sb.ToString());
             Console.WriteLine("File written");
             return true;
         }

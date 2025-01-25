@@ -41,9 +41,11 @@ public partial class MainWindow
         QuestsListJaeger.ItemsSource = questsData.JaegerQuests;
         
         QuestsListLightkeeper.ItemsSource = questsData.LightkeeperQuests;
-        
-        
-        
+        QuestsListRef.ItemsSource = questsData.RefQuests;
+
+
+
+
         PersistentItemManager.ItemChanged += OnPersistentItemChanged;
 
         Loaded += MainWindow_Loaded;
@@ -60,6 +62,10 @@ public partial class MainWindow
     {
         using (var cacheManager = new CacheManager())
         {
+            // Update image files from api for development
+            // await CacheManager.UpdateImagesDev();
+
+
             await CacheManager.Update(questsData, itemsData);
         }
     }
@@ -81,6 +87,8 @@ public partial class MainWindow
         var searchTerm = ItemsSearchBox.Text;
         SearchItems(searchTerm, LootFilters.ActiveFilters);
     }
+
+    
 
     private void SearchItems(string searchTerm, List<LootFilter> filters)
     {

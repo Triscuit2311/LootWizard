@@ -1508,6 +1508,145 @@
                             </ListView>
                         </TabItem>
 
+                        <TabItem>
+                            <TabItem.Header>
+                                <Image Source="resources/eft/traders/Ref.png" Width="36" Height="36"></Image>
+                            </TabItem.Header>
+                            <ListView Grid.Row="1" x:Name="QuestsListRef" Margin="10,5,10,10"
+                                      HorizontalContentAlignment="Stretch"
+                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
+                                <ListView.ItemContainerStyle>
+                                    <Style TargetType="ListViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    </Style>
+                                </ListView.ItemContainerStyle>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate DataType="{x:Type local:DisplayQuest}">
+                                        <Grid Margin="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="Auto"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="15" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="15" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="1" Orientation="Vertical" Margin="10,0,0,0">
+                                                <TextBlock FontWeight="Bold" Text="{Binding questName}" />
+                                            </StackPanel>
+
+
+                                            <ListView Grid.Column="1" Grid.Row="1" ItemsSource="{Binding RequiredItems}"
+                                                      HorizontalContentAlignment="Stretch"
+                                                      Background="{DynamicResource BackgroundColor}" Foreground="{DynamicResource ForegroundColor}">
+                                                <ListView.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid HorizontalAlignment="Stretch">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <!-- For Image -->
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <!-- For Text -->
+                                                                <ColumnDefinition Width="*" />
+                                                                <!-- For Counter and Checkbox -->
+                                                            </Grid.ColumnDefinitions>
+
+                                                            <Image Grid.Column="0" Source="{Binding ImageResource}"
+                                                                   Width="36" Height="36" />
+
+                                                            <StackPanel Grid.Column="1" Orientation="Vertical"
+                                                                        Margin="5">
+                                                                <TextBlock Text="{Binding Name}" />
+                                                                <TextBlock Text="{Binding QuantityNeededStr}" />
+                                                            </StackPanel>
+
+                                                            <!-- Right Side Grid for Counter and Checkbox -->
+                                                            <Grid Grid.Column="2">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="*" />
+                                                                    <!-- For Counter -->
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <!-- For Checkbox -->
+                                                                </Grid.ColumnDefinitions>
+
+                                                                <!-- Counter -->
+                                                                <StackPanel HorizontalAlignment="Right" Grid.Column="0"
+                                                                            Orientation="Horizontal" Margin="5">
+                                                                    <Button x:Name="QuestItemDec"
+                                                                            Style="{StaticResource FlatButtonStyle}"
+                                                                            Width="25" Height="25"
+                                                                            Click="QuestItemDec_OnClick">
+                                                                        <Image Source="resources/icons/down-arrow.png"
+                                                                               RenderOptions.BitmapScalingMode="HighQuality" />
+                                                                    </Button>
+                                                                    <TextBlock Margin="10,5"
+                                                                               Text="{Binding QuantityFound}" />
+                                                                    <Button x:Name="QuestItemInc"
+                                                                            Style="{StaticResource FlatButtonStyle}"
+                                                                            Width="25" Height="25"
+                                                                            Click="QuestItemInc_OnClick">
+                                                                        <Image
+                                                                            Source="resources/icons/upward-arrow.png"
+                                                                            RenderOptions.BitmapScalingMode="HighQuality" />
+                                                                    </Button>
+                                                                </StackPanel>
+
+                                                                <!-- Checkbox -->
+                                                                <ToggleButton HorizontalAlignment="Right"
+                                                                              Grid.Column="1"
+                                                                              IsChecked="{Binding Selected}"
+                                                                              Margin="10,0,0,0" Width="24" Height="24"
+                                                                              BorderThickness="0"
+                                                                              Checked="QuestItemToggle_OnChecked"
+                                                                              Unchecked="QuestItemToggle_OnUnchecked">
+                                                                    <ToggleButton.Style>
+                                                                        <Style TargetType="ToggleButton">
+                                                                            <Setter Property="Background"
+                                                                                Value="Transparent" />
+                                                                            <Setter Property="Template">
+                                                                                <Setter.Value>
+                                                                                    <ControlTemplate
+                                                                                        TargetType="ToggleButton">
+                                                                                        <Image x:Name="imgChecked"
+                                                                                            Source="resources/icons/check_active.png"
+                                                                                            RenderOptions.BitmapScalingMode="HighQuality">
+                                                                                            <!-- <Image.Effect> -->
+                                                                                            <!--     <DropShadowEffect -->
+                                                                                            <!--         x:Name="imgShadowEffect" -->
+                                                                                            <!--         Color="Transparent" -->
+                                                                                            <!--         BlurRadius="0" /> -->
+                                                                                            <!-- </Image.Effect> -->
+                                                                                        </Image>
+                                                                                        <ControlTemplate.Triggers>
+                                                                                            <DataTrigger
+                                                                                                Binding="{Binding Selected}"
+                                                                                                Value="True">
+                                                                                                <Setter
+                                                                                                    TargetName="imgChecked"
+                                                                                                    Property="Source"
+                                                                                                    Value="resources/icons/check_inactive.png" />
+                                                                                            </DataTrigger>
+                                                                                        </ControlTemplate.Triggers>
+                                                                                    </ControlTemplate>
+                                                                                </Setter.Value>
+                                                                            </Setter>
+                                                                        </Style>
+                                                                    </ToggleButton.Style>
+                                                                </ToggleButton>
+                                                            </Grid>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ListView.ItemTemplate>
+                                            </ListView>
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </TabItem>
+
                     </TabControl>
 
 

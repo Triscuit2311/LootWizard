@@ -5,39 +5,14 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web.Configuration;
 using System.Windows.Media;
-//using ImageMagick;
 
-//using ImageMagick;
 namespace LootWizard;
 
 public class CacheManager : IDisposable
 {
-    
-    // private static async Task CacheItemImage(HttpClient httpClient, Item item)
-    // {
-    //     string imgDirectory = "img";
-    //     string imgPath = Path.Combine(imgDirectory, $"{item.id}-icon.jpeg");
-    //
-    //     if (!File.Exists(imgPath))
-    //     {
-    //         if (!Directory.Exists(imgDirectory))
-    //         {
-    //             Directory.CreateDirectory(imgDirectory);
-    //         }
-    //
-    //         byte[] imageData = await httpClient.GetByteArrayAsync(item.icon_link);
-    //
-    //         // Convert WebP to JPEG
-    //         using (var webpImage = new MagickImage(imageData))
-    //         {
-    //             webpImage.Format = MagickFormat.Jpeg;
-    //             webpImage.Write(imgPath); // This saves the image in JPEG format
-    //         }
-    //     }
-    // }
-    //
-    
+
     private const string ItemsCacheFile = "items_cache.json";
     private const string QuestsCacheFile = "quests_cache.json";
     private const string LastFetchFile = "last_fetch_time.txt";
@@ -64,6 +39,20 @@ public class CacheManager : IDisposable
                            __typename
                          }
                        }
+                     }
+                     """
+        }
+    };
+
+    private static readonly Dictionary<string, string> items_img_query = new()
+    {
+        {
+            "query", """
+                     {
+                       items {
+                           id
+                           iconLink
+                           }
                      }
                      """
         }
@@ -97,8 +86,95 @@ public class CacheManager : IDisposable
     {
     }
 
+    public static async Task UpdateImagesDev()
+    {
+
+#if DEV
+        string itemsJson;
+
+        var httpClient = new HttpClient();
+        
+        itemsJson = await FetchData(httpClient, items_img_query);
+        File.WriteAllText(ItemsCacheFile, itemsJson);
+        
+
+        const int ContextLength = 50;
+
+        using (var doc = JsonDocument.Parse(itemsJson))
+        {
+
+            if (doc.RootElement.TryGetProperty("data", out var dataElement) &&
+                dataElement.TryGetProperty("items", out var itemsArray))
+            {
+
+
+                foreach (var itemElement in itemsArray.EnumerateArray())
+                {
+
+                    T GetJsonProperty<T>(Func<JsonElement, T> accessor, T defaultValue)
+                    {
+                        try
+                        {
+                            return accessor(itemElement);
+                        }
+                        catch
+                        {
+                            return defaultValue;
+                        }
+                    }
+
+                    try
+                    {
+                        string id = GetJsonProperty(e => e.GetProperty("id").GetString(), string.Empty);
+                        string icon_link = GetJsonProperty(e => e.GetProperty("iconLink").GetString(), string.Empty);
+
+
+
+                        string imgDirectory = "img";
+                        string imgPath = Path.Combine(imgDirectory, $"{id}-icon.jpeg");
+
+                        if (!File.Exists(imgPath))
+                        {
+                            if (!Directory.Exists(imgDirectory))
+                            {
+                                Directory.CreateDirectory(imgDirectory);
+                            }
+
+                            byte[] imageData = await httpClient.GetByteArrayAsync(icon_link);
+
+                            // Convert WebP to JPEG
+                            using (var webpImage = new ImageMagick.MagickImage(imageData))
+                            {
+                                webpImage.Format = ImageMagick.MagickFormat.Jpeg;
+                                webpImage.Write(imgPath); // This saves the image in JPEG format
+                            }
+                        }
+
+
+                    }
+                    catch (Exception ex)
+                    {
+                        // Extract the JSON snippet around the error location
+                        string jsonContext = ExtractJsonContext(itemElement.GetRawText(), ContextLength);
+                        Console.WriteLine($"Error parsing item: {ex.Message}");
+                        Console.WriteLine($"JSON context: {jsonContext}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("The required item properties are not present in the JSON.");
+                Console.WriteLine(itemsJson);
+            }
+        }
+#endif
+
+    }
+
     public static async Task Update(QuestsData questsData, ItemsData itemsData)
     {
+
+
         var lastFetchTime = GetLastFetchTime();
         var isCacheValid = DateTime.Now - lastFetchTime < CacheValidityDuration;
 
@@ -153,17 +229,6 @@ public class CacheManager : IDisposable
                 item.searchable_full,
                 item.id));
         }
-
-        
-      //  Console.WriteLine("STARTING IMAGE CACHE");
-     //   using (var httpClient = new HttpClient())
-      //  //{
-      //      foreach (var item in items)
-      //      {
-      //          await CacheItemImage(httpClient, item);
-     //       }
-     //   }
-        
 
 
 

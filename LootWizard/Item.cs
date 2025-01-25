@@ -22,7 +22,9 @@ public record struct Item
             }
         }
 
-        id = GetJsonProperty(e => e.GetProperty("id").GetString(), string.Empty);
+        id = GetJsonProperty(access => access.GetProperty("id").GetString(), string.Empty);
+
+
         name = GetJsonProperty(e => e.GetProperty("name").GetString(), string.Empty);
         searchable_full = name.ToLower();
         short_name = GetJsonProperty(e => e.GetProperty("shortName").GetString(), string.Empty);

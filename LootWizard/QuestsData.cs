@@ -19,6 +19,7 @@ public class QuestsData
     public ObservableCollection<DisplayQuest> RagmanQuests = new();
     public ObservableCollection<DisplayQuest> JaegerQuests = new();
     public ObservableCollection<DisplayQuest> LightkeeperQuests = new();
+    public ObservableCollection<DisplayQuest> RefQuests = new();
 
     public void BuildQuestPools()
     {
@@ -52,6 +53,9 @@ public class QuestsData
                     break;
                 case "Lightkeeper":
                     LightkeeperQuests.Add(quest);
+                    break;
+                case "Ref":
+                    RefQuests.Add(quest);
                     break;
                 default:
                     break;
