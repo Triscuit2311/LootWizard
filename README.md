@@ -6,7 +6,7 @@ LootWizard is a user-friendly tool for generating an ini file contianing loot ID
 It allows you to favorite items, track items needed for quests, and manage your loot easily through the GUI. It supports searching, filtering by selected items and favorites. All your settings, including quest items tracking, favorites, and selected items, are saved persistently in plain text cache files in the executable's directory.
 
 ### Key Features
-- **Generate INI Files:** LootWizard exclusively generates `ini` files without interacting with the game or windows internals.
+- **Generate JSON Files:** LootWizard exclusively generates `json` files without interacting with the game or windows internals.
 - **Quest Tracking:** Simple up/down buttons for tracking quest items.
 - **Automatic Updates:** The loot list updates automatically when you select an item.
 - **Initial API Data Fetching:** First run fetches data from the API (a few seconds delay).
