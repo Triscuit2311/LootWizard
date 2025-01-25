@@ -2,7 +2,7 @@
 **LootWizard** is a tool designed to simplify the management of your Tarkov loot configuration files, used by various online tools for tracking your in-game metrics. This project is completely transparent, and for those interested, you can build it yourself.
 
 ### What is LootWizard?
-LootWizard is a user-friendly tool for generating an ini file contianing loot ID's of items.
+LootWizard is a user-friendly tool for generating an json file contianing loot ID's of selected items.
 It allows you to favorite items, track items needed for quests, and manage your loot easily through the GUI. It supports searching, filtering by selected items and favorites. All your settings, including quest items tracking, favorites, and selected items, are saved persistently in plain text cache files in the executable's directory.
 
 ### Key Features
